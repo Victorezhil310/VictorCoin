@@ -71,7 +71,7 @@ class Transaction(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     tx_hash: str = Field(index=True, unique=True)
     user_id: int = Field(foreign_key="user.id", index=True)
-    tx_type: str = Field(index=True)  # send, receive, deposit, withdraw, staking_reward, referral_reward
+    tx_type: str = Field(index=True)  # send, receive, deposit, withdraw, staking_reward, referral_reward, mining_claim, owner_commission
     asset: str = Field(default="VCT") # VCT, USD, BTC, ETH
     amount: float
     fee: float = Field(default=0.0)
@@ -119,6 +119,24 @@ class StakingPosition(SQLModel, table=True):
     start_date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     end_date: Optional[datetime] = None
 
+class MiningSession(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="user.id", index=True)
+    hashrate_mhs: float = Field(default=45.8) # Megahashes per second
+    unclaimed_mined_vct: float = Field(default=12.45)
+    total_mined_vct: float = Field(default=154.20)
+    boost_multiplier: float = Field(default=1.5)
+    is_mining: bool = Field(default=True)
+    last_mined_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class OwnerCommissionLog(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    commission_type: str  # trade_fee_cut, mining_pool_royalty, ad_revenue_cut
+    amount_vct: float
+    amount_usd: float
+    source_user_id: Optional[int] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 class SupportTicket(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id", index=True)
@@ -140,7 +158,11 @@ class SystemConfig(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     vct_current_price: float = Field(default=0.2458)
     total_staked_vct: float = Field(default=1250000.0)
+    total_mined_vct: float = Field(default=5420000.0)
+    owner_commission_rate: float = Field(default=0.05) # 5% owner royalty commission on trades & mining
+    total_owner_commission_vct: float = Field(default=458000.0)
     total_users_count: int = Field(default=4500)
     treasury_vct_balance: float = Field(default=500000000.0)
     is_trading_enabled: bool = Field(default=True)
     is_staking_enabled: bool = Field(default=True)
+    is_mining_enabled: bool = Field(default=True)
