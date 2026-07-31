@@ -2,199 +2,212 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VictorCoin (VCT) - Cryptocurrency Trading & Mining Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VictorCoin (VCT) - Institutional Crypto Trading & Staking Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --bg-color: #0B0C0E;
-      --surface-color: #141519;
-      --surface-light: #1F2128;
+      --bg-main: #060708;
+      --surface-card: #0E1015;
+      --surface-light: #181A20;
       --primary-gold: #FFD700;
-      --secondary-gold: #D4AF37;
-      --dark-gold: #B8860B;
+      --gold-light: #FFF099;
+      --gold-dark: #B8960C;
       --green-positive: #00E676;
       --red-negative: #FF5252;
-      --text-primary: #FFFFFF;
-      --text-secondary: #9E9E9E;
-      --card-border: rgba(255, 215, 0, 0.2);
-      --card-gradient: linear-gradient(135deg, #1B1C22 0%, #121317 100%);
-      --gold-gradient: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #996515 100%);
+      --text-main: #FFFFFF;
+      --text-muted: #8E94A0;
+      --border-gold: rgba(255, 215, 0, 0.18);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --card-gradient: linear-gradient(145deg, #13151B 0%, #0B0D11 100%);
+      --gold-gradient: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #996515 100%);
+      --gold-glow: 0 0 25px rgba(255, 215, 0, 0.25);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-primary);
+      background-color: var(--bg-main);
+      color: var(--text-main);
       display: flex;
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    .app-container {
+    .app-shell {
       width: 100%;
       max-width: 480px;
-      background-color: var(--bg-color);
+      background-color: var(--bg-main);
       min-height: 100vh;
       position: relative;
-      padding-bottom: 90px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      padding-bottom: 95px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
       display: flex;
       flex-direction: column;
     }
 
-    /* Header */
-    .top-header {
+    /* Top Bar */
+    .app-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      background-color: var(--bg-color);
+      padding: 18px 22px;
+      background: rgba(6, 7, 8, 0.85);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .user-profile {
+    .profile-info {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .avatar {
-      width: 44px;
-      height: 44px;
+    .user-avatar {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      border: 2px solid var(--primary-gold);
+      border: 1.5px solid var(--primary-gold);
       background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb');
       background-size: cover;
       background-position: center;
+      box-shadow: var(--gold-glow);
     }
 
-    .user-info h4 {
+    .user-text h4 {
       font-size: 15px;
       font-weight: 700;
+      letter-spacing: -0.2px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
 
-    .verified-badge {
+    .verified-icon {
       color: #3b82f6;
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    .user-info p {
+    .user-text p {
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
     }
 
-    .header-actions {
+    .header-btns {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .icon-btn {
+    .action-icon-btn {
       background: var(--surface-light);
-      border: 1px solid var(--card-border);
-      color: var(--text-primary);
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 18px;
-      transition: all 0.2s;
+      font-size: 16px;
+      transition: all 0.2s ease;
     }
 
-    .icon-btn.gold-btn {
+    .action-icon-btn.gold-highlight {
       color: var(--primary-gold);
-      border-color: var(--primary-gold);
+      border-color: var(--border-gold);
+      background: rgba(255, 215, 0, 0.08);
     }
 
-    /* Glass Cards */
-    .glass-card {
+    .action-icon-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Cards & Containers */
+    .gold-glass-card {
       background: var(--card-gradient);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-gold);
       border-radius: 20px;
-      padding: 20px;
+      padding: 22px;
       margin: 0 18px 18px 18px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      overflow: hidden;
     }
 
-    .balance-title-row {
+    .card-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .balance-title {
-      font-size: 13px;
-      color: var(--text-secondary);
+    .card-label {
+      font-size: 12px;
+      color: var(--text-muted);
       font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .change-badge {
-      background: rgba(0, 230, 118, 0.15);
+    .badge-percent {
+      background: rgba(0, 230, 118, 0.12);
       color: var(--green-positive);
       padding: 4px 10px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 700;
+      border: 1px solid rgba(0, 230, 118, 0.2);
     }
 
-    .balance-amount {
-      font-size: 32px;
+    .balance-display {
+      font-size: 34px;
       font-weight: 800;
-      color: var(--text-primary);
+      letter-spacing: -0.5px;
       display: flex;
       align-items: baseline;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .balance-symbol {
+    .gold-symbol {
       font-size: 18px;
       color: var(--primary-gold);
       font-weight: 800;
     }
 
-    .balance-fiat {
+    .balance-subtext {
       font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 2px;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
-    .action-buttons-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
+    /* Quick Action Buttons Row */
+    .quick-actions-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
       margin-top: 20px;
     }
 
-    .action-btn {
-      flex: 1;
+    .action-pill {
       background: var(--surface-light);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-gold);
       border-radius: 12px;
-      padding: 10px 4px;
-      color: var(--text-primary);
+      padding: 10px 0;
+      color: var(--text-main);
       font-size: 13px;
       font-weight: 600;
       display: flex;
@@ -205,73 +218,85 @@
       transition: all 0.2s;
     }
 
-    .action-btn span.gold-icon {
+    .action-pill:hover {
+      background: rgba(255, 215, 0, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .pill-icon {
       color: var(--primary-gold);
       font-weight: bold;
     }
 
-    /* Grid Nav */
-    .quick-grid {
+    /* Nav Grid */
+    .nav-features-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       padding: 0 18px 18px 18px;
     }
 
-    .grid-item {
+    .feature-tile {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .grid-icon-box {
-      width: 58px;
-      height: 58px;
+    .feature-tile:hover {
+      transform: translateY(-3px);
+    }
+
+    .tile-icon-wrapper {
+      width: 56px;
+      height: 56px;
       background: var(--card-gradient);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-gold);
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary-gold);
-      font-size: 24px;
-      transition: transform 0.2s;
+      font-size: 22px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .grid-item span {
+    .feature-tile label {
       font-size: 12px;
-      color: var(--text-primary);
+      color: var(--text-main);
       font-weight: 500;
+      cursor: pointer;
     }
 
-    /* Staking Banner */
-    .staking-banner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Staking Hero Banner */
+    .staking-hero-card {
       background: var(--card-gradient);
       border: 1px solid var(--primary-gold);
       border-radius: 20px;
-      padding: 20px;
+      padding: 22px;
       margin: 0 18px 18px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--gold-glow);
     }
 
-    .banner-text h3 {
+    .hero-content h3 {
       font-size: 18px;
       font-weight: 800;
     }
 
-    .banner-text p {
+    .hero-content p {
       color: var(--primary-gold);
       font-size: 14px;
       font-weight: 700;
       margin: 4px 0 12px 0;
     }
 
-    .banner-text a {
-      color: var(--text-primary);
+    .hero-cta {
+      color: var(--text-main);
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
@@ -280,34 +305,35 @@
       gap: 4px;
     }
 
-    .coin-3d {
-      width: 68px;
-      height: 68px;
+    .gold-v-badge {
+      width: 64px;
+      height: 64px;
       background: var(--gold-gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 38px;
+      font-size: 34px;
       font-weight: 900;
       color: #000;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
     }
 
-    /* Section Titles */
-    .section-header {
+    /* Section Headers */
+    .section-title-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 18px 12px 18px;
+      padding: 0 18px 14px 18px;
     }
 
-    .section-title {
+    .title-text {
       font-size: 17px;
       font-weight: 800;
+      letter-spacing: -0.3px;
     }
 
-    .section-link {
+    .title-link {
       font-size: 13px;
       color: var(--primary-gold);
       font-weight: 700;
@@ -315,35 +341,41 @@
     }
 
     /* Coin List */
-    .coin-list {
+    .markets-list {
       padding: 0 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .coin-item {
+    .coin-row {
       background: var(--card-gradient);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 14px 16px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .coin-left {
+    .coin-row:hover {
+      border-color: var(--border-gold);
+      transform: translateX(2px);
+    }
+
+    .coin-left-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .coin-icon {
-      width: 40px;
-      height: 40px;
+    .coin-icon-circle {
+      width: 42px;
+      height: 42px;
       background: var(--surface-light);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -353,60 +385,59 @@
       font-size: 16px;
     }
 
-    .coin-info h5 {
+    .coin-name-block h5 {
       font-size: 14px;
       font-weight: 700;
     }
 
-    .coin-info p {
+    .coin-name-block p {
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
     }
 
-    .coin-right {
+    .coin-price-block {
       text-align: right;
     }
 
-    .coin-price {
+    .coin-val {
       font-size: 14px;
       font-weight: 700;
     }
 
-    .coin-change {
+    .coin-stat {
       font-size: 12px;
       font-weight: 700;
     }
 
-    .positive { color: var(--green-positive); }
-    .negative { color: var(--red-negative); }
+    .stat-green { color: var(--green-positive); }
+    .stat-red { color: var(--red-negative); }
 
-    /* Features Ribbon */
-    .features-ribbon {
-      margin: 18px;
-      background: var(--surface-color);
-      border: 1px solid var(--card-border);
+    /* Footer Trust Ribbon */
+    .trust-ribbon {
+      margin: 20px 18px 10px 18px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
       border-radius: 14px;
-      padding: 14px 10px;
+      padding: 14px;
       display: flex;
       justify-content: space-around;
     }
 
-    .ribbon-item {
+    .trust-item {
       display: flex;
       align-items: center;
       gap: 6px;
       font-size: 11px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-weight: 600;
     }
 
-    .ribbon-item span {
+    .trust-item span {
       color: var(--primary-gold);
-      font-size: 14px;
     }
 
-    /* Bottom Nav Bar */
-    .bottom-nav {
+    /* Fixed Bottom Navbar */
+    .bottom-tab-bar {
       position: fixed;
       bottom: 0;
       left: 50%;
@@ -414,68 +445,89 @@
       width: 100%;
       max-width: 480px;
       height: 75px;
-      background-color: var(--surface-color);
-      border-top: 1px solid var(--card-border);
+      background-color: rgba(14, 16, 21, 0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
       align-items: center;
       z-index: 200;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.8);
     }
 
-    .nav-tab {
+    .nav-tab-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-size: 11px;
       cursor: pointer;
-      text-decoration: none;
       flex: 1;
+      transition: color 0.2s;
     }
 
-    .nav-tab.active {
+    .nav-tab-item.active {
       color: var(--primary-gold);
       font-weight: 700;
     }
 
-    .nav-tab-icon {
-      font-size: 22px;
+    .tab-icon {
+      font-size: 20px;
     }
 
-    .center-v-btn {
-      width: 54px;
-      height: 54px;
+    .center-action-v {
+      width: 52px;
+      height: 52px;
       background: var(--gold-gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
       color: #000;
       cursor: pointer;
-      box-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
-      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      transform: translateY(-8px);
     }
 
-    /* Views */
-    .view-screen {
+    /* View Screens */
+    .app-screen {
       display: none;
     }
-    .view-screen.active {
+    .app-screen.active-screen {
       display: block;
     }
 
-    /* Owner PIN Modal */
-    .modal-overlay {
+    /* Buttons & Inputs */
+    .gold-btn-solid {
+      width: 100%;
+      padding: 14px;
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 800;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .gold-btn-solid:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Modals */
+    .modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
       z-index: 999;
       display: none;
       align-items: center;
@@ -483,68 +535,42 @@
       padding: 20px;
     }
 
-    .modal-card {
-      background: var(--surface-color);
+    .modal-dialog {
+      background: var(--surface-card);
       border: 1px solid var(--primary-gold);
       border-radius: 24px;
-      padding: 24px;
+      padding: 26px;
       width: 100%;
       max-width: 360px;
       text-align: center;
     }
 
-    .modal-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(255, 215, 0, 0.15);
-      color: var(--primary-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 16px auto;
-    }
-
-    .pin-input {
+    .pin-field {
       width: 100%;
       padding: 14px;
       font-size: 24px;
-      letter-spacing: 12px;
+      letter-spacing: 10px;
       text-align: center;
-      background: var(--bg-color);
-      border: 1px solid var(--card-border);
+      background: var(--bg-main);
+      border: 1px solid var(--border-gold);
       border-radius: 12px;
       color: var(--primary-gold);
-      margin: 16px 0;
+      margin: 18px 0;
       outline: none;
     }
 
-    .gold-submit-btn {
-      width: 100%;
-      padding: 14px;
-      background: var(--gold-gradient);
-      color: #000;
-      font-weight: 800;
-      font-size: 15px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    /* Notification Toast */
-    .toast {
+    .toast-msg {
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--primary-gold);
       color: #000;
-      padding: 12px 20px;
+      padding: 12px 24px;
       border-radius: 30px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
       z-index: 1000;
       display: none;
     }
@@ -552,293 +578,284 @@
 </head>
 <body>
 
-  <div id="toast" class="toast">Notice message</div>
+  <div id="toast" class="toast-msg"></div>
 
   <!-- Owner PIN Login Modal -->
-  <div id="ownerPinModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-icon">👑</div>
-      <h3 style="font-size: 20px; font-weight: 800;">Owner Security Login</h3>
-      <p style="font-size: 12px; color: var(--text-secondary); margin-top: 6px;">
-        Enter secret owner PIN to unlock superuser controls & ad-free royalty mode.
+  <div id="ownerPinModal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div style="font-size: 32px; margin-bottom: 8px;">👑</div>
+      <h3 style="font-size: 20px; font-weight: 800;">Owner Governance PIN</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+        Enter security PIN to unlock platform governance, treasury controls & royalty sweeps.
       </p>
-      <input type="password" id="pinCodeInput" class="pin-input" placeholder="••••••" maxlength="6">
-      <button class="gold-submit-btn" onclick="verifyOwnerPin()">UNLOCK OWNER CONTROLS</button>
-      <p style="font-size: 11px; color: var(--text-secondary); margin-top: 12px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
+      <input type="password" id="pinCodeInput" class="pin-field" placeholder="••••••" maxlength="6">
+      <button class="gold-btn-solid" onclick="verifyOwnerPin()">UNLOCK GOVERNANCE CONTROLS</button>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 14px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
     </div>
   </div>
 
-  <div class="app-container">
+  <div class="app-shell">
 
     <!-- Top Header -->
-    <header class="top-header">
-      <div class="user-profile">
-        <div class="avatar"></div>
-        <div class="user-info">
-          <h4>Hello, Victor <span class="verified-badge">✓</span></h4>
-          <p id="userRoleSub">Welcome Back!</p>
+    <header class="app-header">
+      <div class="profile-info">
+        <div class="user-avatar"></div>
+        <div class="user-text">
+          <h4>Hello, Victor <span class="verified-icon">✓</span></h4>
+          <p id="userRoleSub">Verified Account</p>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="icon-btn gold-btn" onclick="openOwnerModal()" title="Owner Login PIN">👑</button>
-        <button class="icon-btn" onclick="showToast('Notifications: +145.85 VCT Staking Rewards credited')">🔔</button>
+      <div class="header-btns">
+        <button class="action-icon-btn gold-highlight" onclick="openOwnerModal()" title="Owner Governance PIN">👑</button>
+        <button class="action-icon-btn" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</button>
       </div>
     </header>
 
-    <!-- VIEW 0: HOME SCREEN -->
-    <div id="viewHome" class="view-screen active">
-      <div class="glass-card">
-        <div class="balance-title-row">
-          <span class="balance-title">Total Balance</span>
-          <span class="change-badge">▲ 12.5% (24h)</span>
+    <!-- SCREEN 0: HOME -->
+    <div id="screenHome" class="app-screen active-screen">
+      <div class="gold-glass-card">
+        <div class="card-header-row">
+          <span class="card-label">Total Net Asset Value</span>
+          <span class="badge-percent">▲ 12.5% (24h)</span>
         </div>
-        <div class="balance-amount">
+        <div class="balance-display">
           <span id="vctBalDisplay">12,458.75</span>
-          <span class="balance-symbol">VCT</span>
+          <span class="gold-symbol">VCT</span>
         </div>
-        <div class="balance-fiat" id="fiatBalDisplay">≈ $8,742.58 USD</div>
-        <div class="action-buttons-row">
-          <button class="action-btn" onclick="switchTab(3)"><span class="gold-icon">↑</span> Send</button>
-          <button class="action-btn" onclick="switchTab(3)"><span class="gold-icon">↓</span> Receive</button>
-          <button class="action-btn" onclick="switchTab(2)"><span class="gold-icon">+</span> Buy</button>
-          <button class="action-btn" onclick="switchTab(2)"><span class="gold-icon">⇄</span> Swap</button>
+        <div class="balance-subtext" id="fiatBalDisplay">≈ $8,742.58 USD</div>
+
+        <div class="quick-actions-bar">
+          <div class="action-pill" onclick="switchScreen(3)"><span class="pill-icon">↑</span> Send</div>
+          <div class="action-pill" onclick="switchScreen(3)"><span class="pill-icon">↓</span> Receive</div>
+          <div class="action-pill" onclick="switchScreen(2)"><span class="pill-icon">+</span> Buy</div>
+          <div class="action-pill" onclick="switchScreen(2)"><span class="pill-icon">⇄</span> Swap</div>
         </div>
       </div>
 
-      <div class="quick-grid">
-        <div class="grid-item" onclick="switchTab('mining')">
-          <div class="grid-icon-box">⚡</div>
-          <span>Mining</span>
+      <div class="nav-features-grid">
+        <div class="feature-tile" onclick="switchScreen('mining')">
+          <div class="tile-icon-wrapper">⚡</div>
+          <label>Mining</label>
         </div>
-        <div class="grid-item" onclick="switchTab(4)">
-          <div class="grid-icon-box">💰</div>
-          <span>Staking</span>
+        <div class="feature-tile" onclick="switchScreen(4)">
+          <div class="tile-icon-wrapper">💎</div>
+          <label>Staking</label>
         </div>
-        <div class="grid-item" onclick="switchTab('rewards')">
-          <div class="grid-icon-box">🎁</div>
-          <span>Rewards</span>
+        <div class="feature-tile" onclick="switchScreen('rewards')">
+          <div class="tile-icon-wrapper">🎁</div>
+          <label>Rewards</label>
         </div>
-        <div class="grid-item" onclick="switchTab(3)">
-          <div class="grid-icon-box">💳</div>
-          <span>Wallet</span>
+        <div class="feature-tile" onclick="switchScreen(3)">
+          <div class="tile-icon-wrapper">💳</div>
+          <label>Wallet</label>
         </div>
       </div>
 
-      <div class="staking-banner">
-        <div class="banner-text">
-          <h3>Stake VCT</h3>
+      <div class="staking-hero-card">
+        <div class="hero-content">
+          <h3>Stake VCT Vaults</h3>
           <p>Earn up to 18.5% APY</p>
-          <a href="#" onclick="switchTab(4)">Start Staking →</a>
+          <a href="#" class="hero-cta" onclick="switchScreen(4)">Start Yield Staking →</a>
         </div>
-        <div class="coin-3d">V</div>
+        <div class="gold-v-badge">V</div>
       </div>
 
-      <div class="section-header">
-        <span class="section-title">Market Overview</span>
-        <span class="section-link" onclick="switchTab(1)">View All</span>
+      <div class="section-title-bar">
+        <span class="title-text">Market Overview</span>
+        <span class="title-link" onclick="switchScreen(1)">View Markets</span>
       </div>
 
-      <div class="coin-list">
-        <div class="coin-item" onclick="switchTab(2)">
-          <div class="coin-left">
-            <div class="coin-icon">V</div>
-            <div class="coin-info">
+      <div class="markets-list">
+        <div class="coin-row" onclick="switchScreen(2)">
+          <div class="coin-left-group">
+            <div class="coin-icon-circle">V</div>
+            <div class="coin-name-block">
               <h5>VictorCoin</h5>
               <p>VCT / USDT</p>
             </div>
           </div>
-          <div class="coin-right">
-            <div class="coin-price">$0.2458</div>
-            <div class="coin-change positive">▲ +8.32%</div>
+          <div class="coin-price-block">
+            <div class="coin-val">$0.2458</div>
+            <div class="coin-stat stat-green">▲ +8.32%</div>
           </div>
         </div>
 
-        <div class="coin-item" onclick="switchTab(2)">
-          <div class="coin-left">
-            <div class="coin-icon" style="color: #F7931A;">₿</div>
-            <div class="coin-info">
+        <div class="coin-row" onclick="switchScreen(2)">
+          <div class="coin-left-group">
+            <div class="coin-icon-circle" style="color: #F7931A;">₿</div>
+            <div class="coin-name-block">
               <h5>Bitcoin</h5>
               <p>BTC / USDT</p>
             </div>
           </div>
-          <div class="coin-right">
-            <div class="coin-price">$67,245.32</div>
-            <div class="coin-change positive">▲ +3.21%</div>
+          <div class="coin-price-block">
+            <div class="coin-val">$67,245.32</div>
+            <div class="coin-stat stat-green">▲ +3.21%</div>
           </div>
         </div>
 
-        <div class="coin-item" onclick="switchTab(2)">
-          <div class="coin-left">
-            <div class="coin-icon" style="color: #627EEA;">Ξ</div>
-            <div class="coin-info">
+        <div class="coin-row" onclick="switchScreen(2)">
+          <div class="coin-left-group">
+            <div class="coin-icon-circle" style="color: #627EEA;">Ξ</div>
+            <div class="coin-name-block">
               <h5>Ethereum</h5>
               <p>ETH / USDT</p>
             </div>
           </div>
-          <div class="coin-right">
-            <div class="coin-price">$3,245.67</div>
-            <div class="coin-change positive">▲ +2.45%</div>
+          <div class="coin-price-block">
+            <div class="coin-val">$3,245.67</div>
+            <div class="coin-stat stat-green">▲ +2.45%</div>
           </div>
         </div>
       </div>
 
-      <div class="features-ribbon">
-        <div class="ribbon-item"><span>🔒</span> Secure Wallet</div>
-        <div class="ribbon-item"><span>⚡</span> Fast Tx</div>
-        <div class="ribbon-item"><span>%</span> Low Fees</div>
-        <div class="ribbon-item"><span>🎧</span> 24/7 Support</div>
+      <div class="trust-ribbon">
+        <div class="trust-item"><span>🔒</span> Cold Storage</div>
+        <div class="trust-item"><span>⚡</span> Sub-second Tx</div>
+        <div class="trust-item"><span>%</span> 0.05% Fee Rate</div>
+        <div class="trust-item"><span>🛡️</span> KYC Tier 3</div>
       </div>
     </div>
 
-    <!-- VIEW 1: MARKET SCREEN -->
-    <div id="viewMarket" class="view-screen">
+    <!-- SCREEN 1: MARKET -->
+    <div id="screenMarket" class="app-screen">
       <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Market</h2>
-        <input type="text" placeholder="Search Coin..." style="width: 100%; padding: 12px; background: var(--surface-color); border: 1px solid var(--card-border); border-radius: 12px; color: #fff; margin-bottom: 14px;">
-        <div class="coin-list" style="padding: 0;">
-          <div class="coin-item" onclick="switchTab(2)">
-            <div class="coin-left"><div class="coin-icon">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div>
-            <div class="coin-right"><div>$0.2458</div><div class="positive">+8.32%</div></div>
-          </div>
-          <div class="coin-item" onclick="switchTab(2)">
-            <div class="coin-left"><div class="coin-icon" style="color: #F7931A;">₿</div><div><h5>Bitcoin</h5><p>BTC</p></div></div>
-            <div class="coin-right"><div>$67,245.32</div><div class="positive">+3.21%</div></div>
-          </div>
-          <div class="coin-item" onclick="switchTab(2)">
-            <div class="coin-left"><div class="coin-icon" style="color: #627EEA;">Ξ</div><div><h5>Ethereum</h5><p>ETH</p></div></div>
-            <div class="coin-right"><div>$3,245.67</div><div class="positive">+2.45%</div></div>
-          </div>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Institutional Markets</h2>
+        <input type="text" placeholder="Search Cryptocurrencies..." style="width: 100%; padding: 14px; background: var(--surface-card); border: 1px solid var(--border-gold); border-radius: 12px; color: #fff; margin-bottom: 16px; outline: none;">
+        <div class="markets-list" style="padding: 0;">
+          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div><div class="coin-price-block"><div>$0.2458</div><div class="stat-green">+8.32%</div></div></div>
+          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle" style="color: #F7931A;">₿</div><div><h5>Bitcoin</h5><p>BTC</p></div></div><div class="coin-price-block"><div>$67,245.32</div><div class="stat-green">+3.21%</div></div></div>
+          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle" style="color: #627EEA;">Ξ</div><div><h5>Ethereum</h5><p>ETH</p></div></div><div class="coin-price-block"><div>$3,245.67</div><div class="stat-green">+2.45%</div></div></div>
         </div>
       </div>
     </div>
 
-    <!-- VIEW 2: TRADE SCREEN -->
-    <div id="viewTrade" class="view-screen">
+    <!-- SCREEN 2: TRADE -->
+    <div id="screenTrade" class="app-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800;">Trade VCT / USDT</h2>
-        <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;">$0.2458 ▲ +8.32%</p>
-        <div class="glass-card" style="margin: 0 0 16px 0; height: 180px; padding: 10px;">
-          <canvas id="tradeChart"></canvas>
+        <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 16px 0;">$0.2458 ▲ +8.32%</p>
+        <div class="gold-glass-card" style="margin: 0 0 18px 0; height: 200px; padding: 10px;">
+          <canvas id="liveChart"></canvas>
         </div>
-        <div class="glass-card" style="margin: 0 0 16px 0;">
-          <label style="font-size: 12px; color: var(--text-secondary);">Amount (VCT)</label>
-          <input type="number" id="tradeAmount" value="100" style="width: 100%; padding: 12px; background: var(--bg-color); border: 1px solid var(--card-border); border-radius: 10px; color: #fff; margin: 6px 0 14px 0;">
-          <button class="gold-submit-btn" style="background: var(--green-positive);" onclick="executeWebTrade('buy')">BUY VCT</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- VIEW 3: WALLET SCREEN -->
-    <div id="viewWallet" class="view-screen">
-      <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">My Wallet</h2>
-        <div class="glass-card" style="margin: 0 0 16px 0;">
-          <p style="font-size: 11px; color: var(--text-secondary);">Wallet Address</p>
-          <p style="color: var(--primary-gold); font-size: 13px; font-weight: 700; word-break: break-all;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
-        </div>
-        <h4 style="margin-bottom: 10px;">Supported Deposit Gateways</h4>
-        <p style="font-size: 13px; color: var(--text-secondary);">UPI • Razorpay • Paytm • PhonePe • Bank Transfer</p>
-      </div>
-    </div>
-
-    <!-- VIEW 4: STAKING / OWNER SCREEN -->
-    <div id="viewOwner" class="view-screen">
-      <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">👑 Owner Control Center</h2>
-        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">Full Platform Governance & Royalty Hub</p>
-        <div class="glass-card" style="margin: 0 0 16px 0; border-color: var(--green-positive);">
-          <h4 style="color: var(--green-positive);">Owner Royalty Commissions</h4>
-          <p style="font-size: 13px; margin-top: 8px;">Trade Fee Cuts (5%): <strong>458,900 VCT</strong> ($112,797 USD)</p>
-          <p style="font-size: 13px; margin-top: 4px;">Mining Royalty (5%): <strong>124,500 VCT</strong> ($30,602 USD)</p>
-          <button class="gold-submit-btn" style="margin-top: 14px;" onclick="showToast('Swept Owner Commissions to Wallet!')">WITHDRAW COMMISSIONS</button>
+        <div class="gold-glass-card" style="margin: 0;">
+          <label style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Amount (VCT)</label>
+          <input type="number" id="tradeAmtInput" value="100" style="width: 100%; padding: 14px; background: var(--bg-main); border: 1px solid var(--border-gold); border-radius: 10px; color: #fff; margin: 8px 0 16px 0; font-size: 16px; outline: none;">
+          <button class="gold-btn-solid" style="background: var(--green-positive);" onclick="executeTradeOrder('buy')">EXECUTE BUY ORDER</button>
         </div>
       </div>
     </div>
 
-    <!-- VIEW MINING -->
-    <div id="viewMining" class="view-screen">
+    <!-- SCREEN 3: WALLET -->
+    <div id="screenWallet" class="app-screen">
       <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud PoS Mining</h2>
-        <div class="glass-card" style="margin: 14px 0;">
-          <p style="font-size: 12px; color: var(--text-secondary);">Mining Speed</p>
-          <h3 style="font-size: 28px; color: var(--primary-gold); font-weight: 800;">45.8 MH/s (Active)</h3>
-          <p style="font-size: 13px; color: var(--green-positive); margin-top: 4px;">Yield: ~24.7 VCT / day</p>
-          <button class="gold-submit-btn" style="margin-top: 14px;" onclick="showToast('Claimed +12.45 Mined VCT to Wallet (5% Owner Tax applied)')">CLAIM MINED VCT</button>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Secure Custody Wallet</h2>
+        <div class="gold-glass-card" style="margin: 0 0 16px 0;">
+          <p style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Deposit Address</p>
+          <p style="color: var(--primary-gold); font-size: 13px; font-weight: 700; word-break: break-all; margin-top: 4px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
+        </div>
+        <h4 style="margin-bottom: 10px;">Supported Fiat Payment Rails</h4>
+        <p style="font-size: 13px; color: var(--text-muted);">UPI Instant • Razorpay • Paytm • PhonePe • SEPA • Cards</p>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: OWNER GOVERNANCE -->
+    <div id="screenOwner" class="app-screen">
+      <div style="padding: 18px;">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">👑 Owner Governance Center</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px;">Executive Governance & Commission Management</p>
+        <div class="gold-glass-card" style="margin: 0; border-color: var(--green-positive);">
+          <h4 style="color: var(--green-positive);">Owner Royalty & Commissions</h4>
+          <p style="font-size: 14px; margin-top: 10px;">Trade Cut (5% Rate): <strong>458,900 VCT</strong> ($112,797 USD)</p>
+          <p style="font-size: 14px; margin-top: 6px;">Mining Tax (5% Rate): <strong>124,500 VCT</strong> ($30,602 USD)</p>
+          <button class="gold-btn-solid" style="margin-top: 18px;" onclick="showToast('Swept Owner Commissions to Wallet Successfully!')">WITHDRAW COMMISSIONS TO WALLET</button>
         </div>
       </div>
     </div>
 
-    <!-- VIEW REWARDS -->
-    <div id="viewRewards" class="view-screen">
+    <!-- SCREEN MINING -->
+    <div id="screenMining" class="app-screen">
       <div style="padding: 18px;">
-        <div class="glass-card" style="margin: 0; border-color: var(--primary-gold); background: linear-gradient(135deg, #201B0B 0%, #0F0D06 100%);">
-          <p style="color: var(--primary-gold); font-weight: 800;">VictorCoin Hub</p>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud Proof-of-Stake Mining</h2>
+        <div class="gold-glass-card" style="margin: 14px 0;">
+          <p style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Active Hashrate</p>
+          <h3 style="font-size: 32px; color: var(--primary-gold); font-weight: 800; margin: 4px 0;">45.8 MH/s</h3>
+          <p style="font-size: 13px; color: var(--green-positive);">Yield: ~24.7 VCT / day</p>
+          <button class="gold-btn-solid" style="margin-top: 16px;" onclick="showToast('Claimed +12.45 Mined VCT to Wallet (5% Owner Tax applied)')">CLAIM MINED VCT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN REWARDS -->
+    <div id="screenRewards" class="app-screen">
+      <div style="padding: 18px;">
+        <div class="gold-glass-card" style="margin: 0; border-color: var(--primary-gold); background: linear-gradient(145deg, #241E0D 0%, #0F0D07 100%);">
+          <p style="color: var(--primary-gold); font-weight: 800; text-transform: uppercase; font-size: 12px;">VictorCoin Hub</p>
           <h2 style="font-size: 26px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
-          <h1 style="font-size: 42px; font-weight: 900; color: var(--primary-gold);">$5,000</h1>
-          <p style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 14px 0;">Special offer for new registered users</p>
-          <button class="gold-submit-btn" onclick="showToast('Welcome Bonus Claimed!')">CLAIM WELCOME BONUS</button>
+          <h1 style="font-size: 46px; font-weight: 900; color: var(--primary-gold); margin: 6px 0;">$5,000</h1>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Special promotion for registered users</p>
+          <button class="gold-btn-solid" onclick="showToast('Welcome Bonus Claimed!')">CLAIM WELCOME BONUS</button>
         </div>
       </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav">
-      <div class="nav-tab active" onclick="switchTab(0)">
-        <span class="nav-tab-icon">🏠</span>
+    <!-- Fixed Navigation Bar -->
+    <nav class="bottom-tab-bar">
+      <div class="nav-tab-item active" onclick="switchScreen(0)">
+        <span class="tab-icon">🏠</span>
         <span>Home</span>
       </div>
-      <div class="nav-tab" onclick="switchTab(1)">
-        <span class="nav-tab-icon">📊</span>
-        <span>Market</span>
+      <div class="nav-tab-item" onclick="switchScreen(1)">
+        <span class="tab-icon">📊</span>
+        <span>Markets</span>
       </div>
-      <div class="center-v-btn" onclick="switchTab(2)" title="Trade">V</div>
-      <div class="nav-tab" onclick="switchTab(3)">
-        <span class="nav-tab-icon">💳</span>
+      <div class="center-action-v" onclick="switchScreen(2)" title="Trade Terminal">V</div>
+      <div class="nav-tab-item" onclick="switchScreen(3)">
+        <span class="tab-icon">💳</span>
         <span>Wallet</span>
       </div>
-      <div class="nav-tab" onclick="switchTab(4)">
-        <span class="nav-tab-icon" id="ownerTabIcon">👑</span>
-        <span id="ownerTabLabel">Owner</span>
+      <div class="nav-tab-item" onclick="switchScreen(4)">
+        <span class="tab-icon">👑</span>
+        <span>Governance</span>
       </div>
     </nav>
 
   </div>
 
   <script>
-    let vctBal = 12458.75;
-    let fiatBal = 8742.58;
-    let isOwnerMode = true;
+    let currentVctBal = 12458.75;
+    let isOwnerVerified = true;
 
-    function showToast(msg) {
+    function showToast(text) {
       const toast = document.getElementById('toast');
-      toast.innerText = msg;
+      toast.innerText = text;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+      setTimeout(() => { toast.style.display = 'none'; }, 3200);
     }
 
-    function switchTab(tabIndex) {
-      document.querySelectorAll('.view-screen').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+    function switchScreen(index) {
+      document.querySelectorAll('.app-screen').forEach(el => el.classList.remove('active-screen'));
+      document.querySelectorAll('.nav-tab-item').forEach(el => el.classList.remove('active'));
 
-      if (tabIndex === 0) {
-        document.getElementById('viewHome').classList.add('active');
-        document.querySelectorAll('.nav-tab')[0].classList.add('active');
-      } else if (tabIndex === 1) {
-        document.getElementById('viewMarket').classList.add('active');
-        document.querySelectorAll('.nav-tab')[1].classList.add('active');
-      } else if (tabIndex === 2) {
-        document.getElementById('viewTrade').classList.add('active');
-        initChart();
-      } else if (tabIndex === 3) {
-        document.getElementById('viewWallet').classList.add('active');
-        document.querySelectorAll('.nav-tab')[2].classList.add('active');
-      } else if (tabIndex === 4) {
-        document.getElementById('viewOwner').classList.add('active');
-        document.querySelectorAll('.nav-tab')[3].classList.add('active');
-      } else if (tabIndex === 'mining') {
-        document.getElementById('viewMining').classList.add('active');
-      } else if (tabIndex === 'rewards') {
-        document.getElementById('viewRewards').classList.add('active');
+      if (index === 0) {
+        document.getElementById('screenHome').classList.add('active-screen');
+        document.querySelectorAll('.nav-tab-item')[0].classList.add('active');
+      } else if (index === 1) {
+        document.getElementById('screenMarket').classList.add('active-screen');
+        document.querySelectorAll('.nav-tab-item')[1].classList.add('active');
+      } else if (index === 2) {
+        document.getElementById('screenTrade').classList.add('active-screen');
+        renderLiveChart();
+      } else if (index === 3) {
+        document.getElementById('screenWallet').classList.add('active-screen');
+        document.querySelectorAll('.nav-tab-item')[2].classList.add('active');
+      } else if (index === 4) {
+        document.getElementById('screenOwner').classList.add('active-screen');
+        document.querySelectorAll('.nav-tab-item')[3].classList.add('active');
+      } else if (index === 'mining') {
+        document.getElementById('screenMining').classList.add('active-screen');
+      } else if (index === 'rewards') {
+        document.getElementById('screenRewards').classList.add('active-screen');
       }
     }
 
@@ -852,37 +869,36 @@
 
     function verifyOwnerPin() {
       const pin = document.getElementById('pinCodeInput').value;
-      if (pin === "888888" || pin === "123456" || pin === "000000" || pin.length > 0) {
-        isOwnerMode = true;
+      if (pin.length > 0) {
+        isOwnerVerified = true;
         closeOwnerModal();
-        showToast("👑 OWNER UNLOCKED - Superuser Rights Active");
+        showToast("👑 GOVERNANCE CONTROLS UNLOCKED");
         document.getElementById('userRoleSub').innerText = "👑 Owner Superuser";
-      } else {
-        showToast("Invalid Owner PIN");
       }
     }
 
-    function executeWebTrade(side) {
-      const amt = parseFloat(document.getElementById('tradeAmount').value) || 100;
-      vctBal += amt;
-      document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
-      showToast(`Trade Executed: BUY ${amt} VCT @ $0.2458`);
+    function executeTradeOrder(side) {
+      const val = parseFloat(document.getElementById('tradeAmtInput').value) || 100;
+      currentVctBal += val;
+      document.getElementById('vctBalDisplay').innerText = currentVctBal.toFixed(2);
+      showToast(`Market Order Executed: BUY ${val} VCT @ $0.2458`);
     }
 
-    function initChart() {
-      const ctx = document.getElementById('tradeChart');
-      if (!ctx || ctx.chart) return;
-      ctx.chart = new Chart(ctx, {
+    function renderLiveChart() {
+      const el = document.getElementById('liveChart');
+      if (!el || el.chartInstance) return;
+      el.chartInstance = new Chart(el, {
         type: 'line',
         data: {
-          labels: ['1H', '2H', '3H', '4H', '5H', '6H', '7H'],
+          labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
           datasets: [{
             label: 'VCT/USDT',
             data: [0.220, 0.228, 0.225, 0.235, 0.230, 0.242, 0.2458],
             borderColor: '#00E676',
             backgroundColor: 'rgba(0, 230, 118, 0.15)',
             fill: true,
-            tension: 0.4
+            borderWidth: 2,
+            tension: 0.35
           }]
         },
         options: {
