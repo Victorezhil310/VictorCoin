@@ -3,28 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VictorCoin (VCT) - Institutional Crypto Trading & Staking Platform</title>
+  <title>VictorCoin (VCT) - Multi-Theme Crypto Exchange & Mining Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root {
+    /* Dynamic Theme CSS Variables */
+    :root[data-theme="gold"] {
       --bg-main: #060708;
       --surface-card: #0E1015;
       --surface-light: #181A20;
-      --primary-gold: #FFD700;
-      --gold-light: #FFF099;
-      --gold-dark: #B8960C;
+      --primary-accent: #FFD700;
+      --accent-glow: rgba(255, 215, 0, 0.25);
       --green-positive: #00E676;
       --red-negative: #FF5252;
       --text-main: #FFFFFF;
       --text-muted: #8E94A0;
-      --border-gold: rgba(255, 215, 0, 0.18);
+      --border-accent: rgba(255, 215, 0, 0.2);
       --border-subtle: rgba(255, 255, 255, 0.06);
       --card-gradient: linear-gradient(145deg, #13151B 0%, #0B0D11 100%);
-      --gold-gradient: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #996515 100%);
-      --gold-glow: 0 0 25px rgba(255, 215, 0, 0.25);
+      --accent-gradient: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #996515 100%);
+    }
+
+    :root[data-theme="emerald"] {
+      --bg-main: #040D09;
+      --surface-card: #0A1812;
+      --surface-light: #12241C;
+      --primary-accent: #00E676;
+      --accent-glow: rgba(0, 230, 118, 0.25);
+      --green-positive: #00E676;
+      --red-negative: #FF5252;
+      --text-main: #FFFFFF;
+      --text-muted: #80A393;
+      --border-accent: rgba(0, 230, 118, 0.25);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --card-gradient: linear-gradient(145deg, #0F2219 0%, #07140D 100%);
+      --accent-gradient: linear-gradient(135deg, #69F0AE 0%, #00E676 50%, #00B0FF 100%);
+    }
+
+    :root[data-theme="cyberpunk"] {
+      --bg-main: #0B0514;
+      --surface-card: #150B24;
+      --surface-light: #221238;
+      --primary-accent: #00E5FF;
+      --accent-glow: rgba(0, 229, 255, 0.3);
+      --green-positive: #00E676;
+      --red-negative: #FF0055;
+      --text-main: #FFFFFF;
+      --text-muted: #A08DB5;
+      --border-accent: rgba(0, 229, 255, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --card-gradient: linear-gradient(145deg, #1F0F35 0%, #0F071C 100%);
+      --accent-gradient: linear-gradient(135deg, #00E5FF 0%, #7C4DFF 50%, #FF007F 100%);
+    }
+
+    :root[data-theme="silver"] {
+      --bg-main: #0B0C0E;
+      --surface-card: #14161B;
+      --surface-light: #1E222A;
+      --primary-accent: #E0E6ED;
+      --accent-glow: rgba(224, 230, 237, 0.2);
+      --green-positive: #00E676;
+      --red-negative: #FF5252;
+      --text-main: #FFFFFF;
+      --text-muted: #8B94A0;
+      --border-accent: rgba(224, 230, 237, 0.25);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --card-gradient: linear-gradient(145deg, #1C2028 0%, #101217 100%);
+      --accent-gradient: linear-gradient(135deg, #FFFFFF 0%, #B0B9C6 50%, #687280 100%);
     }
 
     * {
@@ -42,6 +89,7 @@
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
+      transition: background-color 0.3s ease;
     }
 
     .app-shell {
@@ -56,12 +104,12 @@
       flex-direction: column;
     }
 
-    /* Top Bar */
+    /* Top App Header */
     .app-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 22px;
+      padding: 16px 20px;
       background: rgba(6, 7, 8, 0.85);
       backdrop-filter: blur(12px);
       position: sticky;
@@ -70,49 +118,43 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .profile-info {
+    .profile-group {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .user-avatar {
+    .avatar-img {
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 1.5px solid var(--primary-gold);
+      border: 1.5px solid var(--primary-accent);
       background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb');
       background-size: cover;
       background-position: center;
-      box-shadow: var(--gold-glow);
+      box-shadow: var(--accent-glow);
     }
 
-    .user-text h4 {
+    .profile-meta h4 {
       font-size: 15px;
       font-weight: 700;
-      letter-spacing: -0.2px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
-    .verified-icon {
-      color: #3b82f6;
-      font-size: 13px;
-    }
-
-    .user-text p {
+    .profile-meta p {
       font-size: 12px;
       color: var(--text-muted);
     }
 
-    .header-btns {
+    .header-controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .action-icon-btn {
+    .ctrl-icon-btn {
       background: var(--surface-light);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
@@ -124,56 +166,58 @@
       justify-content: center;
       cursor: pointer;
       font-size: 16px;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
-    .action-icon-btn.gold-highlight {
-      color: var(--primary-gold);
-      border-color: var(--border-gold);
-      background: rgba(255, 215, 0, 0.08);
+    .ctrl-icon-btn.highlight {
+      color: var(--primary-accent);
+      border-color: var(--border-accent);
     }
 
-    .action-icon-btn:hover {
-      transform: translateY(-2px);
+    /* Theme Switcher Bar */
+    .theme-bar {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 18px;
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* Cards & Containers */
-    .gold-glass-card {
+    .theme-chip {
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .theme-chip.active {
+      border-color: var(--primary-accent);
+      color: var(--primary-accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Glass Cards */
+    .glass-card {
       background: var(--card-gradient);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--border-accent);
       border-radius: 20px;
-      padding: 22px;
-      margin: 0 18px 18px 18px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      position: relative;
+      padding: 20px;
+      margin: 16px 18px 0 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    .card-header-row {
+    .balance-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .card-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-percent {
-      background: rgba(0, 230, 118, 0.12);
-      color: var(--green-positive);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid rgba(0, 230, 118, 0.2);
-    }
-
-    .balance-display {
+    .balance-val {
       font-size: 34px;
       font-weight: 800;
       letter-spacing: -0.5px;
@@ -182,262 +226,140 @@
       gap: 8px;
     }
 
-    .gold-symbol {
+    .balance-symbol {
       font-size: 18px;
-      color: var(--primary-gold);
+      color: var(--primary-accent);
       font-weight: 800;
     }
 
-    .balance-subtext {
+    .balance-sub {
       font-size: 13px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
-    /* Quick Action Buttons Row */
-    .quick-actions-bar {
+    .actions-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 20px;
+      gap: 8px;
+      margin-top: 18px;
     }
 
-    .action-pill {
+    .action-button {
       background: var(--surface-light);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--border-accent);
       border-radius: 12px;
       padding: 10px 0;
       color: var(--text-main);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .action-pill:hover {
-      background: rgba(255, 215, 0, 0.12);
+    .action-button:hover {
       transform: translateY(-2px);
     }
 
-    .pill-icon {
-      color: var(--primary-gold);
-      font-weight: bold;
-    }
-
-    /* Nav Grid */
-    .nav-features-grid {
+    /* Quick Feature Nav */
+    .feature-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      padding: 0 18px 18px 18px;
+      padding: 16px 18px 0 18px;
     }
 
-    .feature-tile {
+    .tile-box {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition: transform 0.2s;
     }
 
-    .feature-tile:hover {
-      transform: translateY(-3px);
-    }
-
-    .tile-icon-wrapper {
+    .tile-icon {
       width: 56px;
       height: 56px;
       background: var(--card-gradient);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--border-accent);
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--primary-gold);
+      color: var(--primary-accent);
       font-size: 22px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .feature-tile label {
+    .tile-box label {
       font-size: 12px;
       color: var(--text-main);
       font-weight: 500;
       cursor: pointer;
     }
 
-    /* Staking Hero Banner */
-    .staking-hero-card {
-      background: var(--card-gradient);
-      border: 1px solid var(--primary-gold);
-      border-radius: 20px;
-      padding: 22px;
-      margin: 0 18px 18px 18px;
+    /* Order Book Preview Table */
+    .orderbook-card {
+      margin: 16px 18px 0 18px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .orderbook-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--gold-glow);
+      font-size: 12px;
+      padding: 4px 0;
     }
 
-    .hero-content h3 {
-      font-size: 18px;
-      font-weight: 800;
+    /* Market List */
+    .market-list-section {
+      padding: 16px 18px;
     }
 
-    .hero-content p {
-      color: var(--primary-gold);
-      font-size: 14px;
-      font-weight: 700;
-      margin: 4px 0 12px 0;
-    }
-
-    .hero-cta {
-      color: var(--text-main);
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .gold-v-badge {
-      width: 64px;
-      height: 64px;
-      background: var(--gold-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      font-weight: 900;
-      color: #000;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-    }
-
-    /* Section Headers */
-    .section-title-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 18px 14px 18px;
-    }
-
-    .title-text {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
-
-    .title-link {
-      font-size: 13px;
-      color: var(--primary-gold);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Coin List */
-    .markets-list {
-      padding: 0 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .coin-row {
+    .coin-item-card {
       background: var(--card-gradient);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 14px 18px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 10px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .coin-row:hover {
-      border-color: var(--border-gold);
-      transform: translateX(2px);
-    }
-
-    .coin-left-group {
+    .coin-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .coin-icon-circle {
-      width: 42px;
-      height: 42px;
+    .coin-badge {
+      width: 40px;
+      height: 40px;
       background: var(--surface-light);
-      border: 1px solid var(--border-gold);
+      border: 1px solid var(--border-accent);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      color: var(--primary-gold);
+      color: var(--primary-accent);
       font-size: 16px;
     }
 
-    .coin-name-block h5 {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .coin-name-block p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .coin-price-block {
+    .coin-right {
       text-align: right;
     }
 
-    .coin-val {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .coin-stat {
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .stat-green { color: var(--green-positive); }
-    .stat-red { color: var(--red-negative); }
-
-    /* Footer Trust Ribbon */
-    .trust-ribbon {
-      margin: 20px 18px 10px 18px;
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .trust-item span {
-      color: var(--primary-gold);
-    }
-
-    /* Fixed Bottom Navbar */
-    .bottom-tab-bar {
+    /* Bottom Nav Bar */
+    .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 50%;
@@ -452,10 +374,9 @@
       justify-content: space-around;
       align-items: center;
       z-index: 200;
-      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.8);
     }
 
-    .nav-tab-item {
+    .nav-tab {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -464,22 +385,17 @@
       font-size: 11px;
       cursor: pointer;
       flex: 1;
-      transition: color 0.2s;
     }
 
-    .nav-tab-item.active {
-      color: var(--primary-gold);
+    .nav-tab.active {
+      color: var(--primary-accent);
       font-weight: 700;
     }
 
-    .tab-icon {
-      font-size: 20px;
-    }
-
-    .center-action-v {
+    .center-v-pill {
       width: 52px;
       height: 52px;
-      background: var(--gold-gradient);
+      background: var(--accent-gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -488,39 +404,26 @@
       font-weight: 900;
       color: #000;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      box-shadow: var(--accent-glow);
       transform: translateY(-8px);
     }
 
-    /* View Screens */
-    .app-screen {
-      display: none;
-    }
-    .app-screen.active-screen {
-      display: block;
-    }
+    .screen-view { display: none; }
+    .screen-view.active { display: block; }
 
-    /* Buttons & Inputs */
-    .gold-btn-solid {
+    .gold-btn {
       width: 100%;
       padding: 14px;
-      background: var(--gold-gradient);
+      background: var(--accent-gradient);
       color: #000;
       font-weight: 800;
       font-size: 14px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.2s;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
     }
 
-    .gold-btn-solid:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Modals */
-    .modal-backdrop {
+    .modal-bg {
       position: fixed;
       top: 0;
       left: 0;
@@ -535,36 +438,22 @@
       padding: 20px;
     }
 
-    .modal-dialog {
+    .modal-box {
       background: var(--surface-card);
-      border: 1px solid var(--primary-gold);
+      border: 1px solid var(--border-accent);
       border-radius: 24px;
-      padding: 26px;
+      padding: 24px;
       width: 100%;
       max-width: 360px;
       text-align: center;
     }
 
-    .pin-field {
-      width: 100%;
-      padding: 14px;
-      font-size: 24px;
-      letter-spacing: 10px;
-      text-align: center;
-      background: var(--bg-main);
-      border: 1px solid var(--border-gold);
-      border-radius: 12px;
-      color: var(--primary-gold);
-      margin: 18px 0;
-      outline: none;
-    }
-
-    .toast-msg {
+    .toast-popup {
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--primary-gold);
+      background: var(--primary-accent);
       color: #000;
       padding: 12px 24px;
       border-radius: 30px;
@@ -576,21 +465,31 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="gold">
 
-  <div id="toast" class="toast-msg"></div>
+  <div id="toast" class="toast-popup"></div>
 
-  <!-- Owner PIN Login Modal -->
-  <div id="ownerPinModal" class="modal-backdrop">
-    <div class="modal-dialog">
-      <div style="font-size: 32px; margin-bottom: 8px;">👑</div>
-      <h3 style="font-size: 20px; font-weight: 800;">Owner Governance PIN</h3>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
-        Enter security PIN to unlock platform governance, treasury controls & royalty sweeps.
-      </p>
-      <input type="password" id="pinCodeInput" class="pin-field" placeholder="••••••" maxlength="6">
-      <button class="gold-btn-solid" onclick="verifyOwnerPin()">UNLOCK GOVERNANCE CONTROLS</button>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 14px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
+  <!-- Custom Balance Configurator Modal -->
+  <div id="balanceConfigModal" class="modal-bg">
+    <div class="modal-box">
+      <h3>⚙️ Balance Customizer</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Set initial balances for testing</p>
+      <input type="number" id="vctInput" placeholder="VCT Balance" value="12458.75" style="width: 100%; padding: 12px; margin: 12px 0; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff;">
+      <input type="number" id="usdtInput" placeholder="USDT Balance" value="100.25" style="width: 100%; padding: 12px; margin-bottom: 14px; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff;">
+      <button class="gold-btn" onclick="saveCustomBalances()">SAVE BALANCES</button>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; cursor: pointer;" onclick="closeConfigModal()">Close</p>
+    </div>
+  </div>
+
+  <!-- Owner PIN Modal -->
+  <div id="ownerPinModal" class="modal-bg">
+    <div class="modal-box">
+      <div style="font-size: 32px; margin-bottom: 6px;">👑</div>
+      <h3>Owner Security Login</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enter PIN for owner controls</p>
+      <input type="password" id="pinCodeInput" placeholder="••••••" maxlength="6" style="width: 100%; padding: 14px; font-size: 24px; letter-spacing: 8px; text-align: center; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: var(--primary-accent); margin: 14px 0; outline: none;">
+      <button class="gold-btn" onclick="verifyOwnerPin()">UNLOCK OWNER CONTROLS</button>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
     </div>
   </div>
 
@@ -598,224 +497,210 @@
 
     <!-- Top Header -->
     <header class="app-header">
-      <div class="profile-info">
-        <div class="user-avatar"></div>
-        <div class="user-text">
-          <h4>Hello, Victor <span class="verified-icon">✓</span></h4>
+      <div class="profile-group">
+        <div class="avatar-img"></div>
+        <div class="profile-meta">
+          <h4>Hello, Victor <span>✓</span></h4>
           <p id="userRoleSub">Verified Account</p>
         </div>
       </div>
-      <div class="header-btns">
-        <button class="action-icon-btn gold-highlight" onclick="openOwnerModal()" title="Owner Governance PIN">👑</button>
-        <button class="action-icon-btn" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</button>
+      <div class="header-controls">
+        <button class="ctrl-icon-btn highlight" onclick="openConfigModal()" title="Customize Balances">⚙️</button>
+        <button class="ctrl-icon-btn highlight" onclick="openOwnerModal()" title="Owner Login PIN">👑</button>
+        <button class="ctrl-icon-btn" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</button>
       </div>
     </header>
 
-    <!-- SCREEN 0: HOME -->
-    <div id="screenHome" class="app-screen active-screen">
-      <div class="gold-glass-card">
-        <div class="card-header-row">
-          <span class="card-label">Total Net Asset Value</span>
-          <span class="badge-percent">▲ 12.5% (24h)</span>
-        </div>
-        <div class="balance-display">
-          <span id="vctBalDisplay">12,458.75</span>
-          <span class="gold-symbol">VCT</span>
-        </div>
-        <div class="balance-subtext" id="fiatBalDisplay">≈ $8,742.58 USD</div>
+    <!-- Theme Switcher Selector -->
+    <div class="theme-bar">
+      <div class="theme-chip active" onclick="setAppTheme('gold')">Gold</div>
+      <div class="theme-chip" onclick="setAppTheme('emerald')">Emerald</div>
+      <div class="theme-chip" onclick="setAppTheme('cyberpunk')">Cyberpunk</div>
+      <div class="theme-chip" onclick="setAppTheme('silver')">Silver</div>
+    </div>
 
-        <div class="quick-actions-bar">
-          <div class="action-pill" onclick="switchScreen(3)"><span class="pill-icon">↑</span> Send</div>
-          <div class="action-pill" onclick="switchScreen(3)"><span class="pill-icon">↓</span> Receive</div>
-          <div class="action-pill" onclick="switchScreen(2)"><span class="pill-icon">+</span> Buy</div>
-          <div class="action-pill" onclick="switchScreen(2)"><span class="pill-icon">⇄</span> Swap</div>
+    <!-- SCREEN 0: HOME -->
+    <div id="screenHome" class="screen-view active">
+      <div class="glass-card">
+        <div class="balance-header">
+          <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Total Balance</span>
+          <span style="background: rgba(0, 230, 118, 0.15); color: var(--green-positive); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">▲ 12.5% (24h)</span>
+        </div>
+        <div class="balance-val">
+          <span id="vctBalDisplay">12,458.75</span>
+          <span class="balance-symbol">VCT</span>
+        </div>
+        <div class="balance-sub" id="fiatBalDisplay">≈ $8,742.58 USD</div>
+        <div class="actions-grid">
+          <div class="action-button" onclick="switchTab(3)"><span style="color: var(--primary-accent);">↑</span> Send</div>
+          <div class="action-button" onclick="switchTab(3)"><span style="color: var(--primary-accent);">↓</span> Receive</div>
+          <div class="action-button" onclick="switchTab(2)"><span style="color: var(--primary-accent);">+</span> Buy</div>
+          <div class="action-button" onclick="switchTab(2)"><span style="color: var(--primary-accent);">⇄</span> Swap</div>
         </div>
       </div>
 
-      <div class="nav-features-grid">
-        <div class="feature-tile" onclick="switchScreen('mining')">
-          <div class="tile-icon-wrapper">⚡</div>
+      <div class="feature-grid">
+        <div class="tile-box" onclick="switchTab('mining')">
+          <div class="tile-icon">⚡</div>
           <label>Mining</label>
         </div>
-        <div class="feature-tile" onclick="switchScreen(4)">
-          <div class="tile-icon-wrapper">💎</div>
+        <div class="tile-box" onclick="switchTab(4)">
+          <div class="tile-icon">💎</div>
           <label>Staking</label>
         </div>
-        <div class="feature-tile" onclick="switchScreen('rewards')">
-          <div class="tile-icon-wrapper">🎁</div>
+        <div class="tile-box" onclick="switchTab('rewards')">
+          <div class="tile-icon">🎁</div>
           <label>Rewards</label>
         </div>
-        <div class="feature-tile" onclick="switchScreen(3)">
-          <div class="tile-icon-wrapper">💳</div>
+        <div class="tile-box" onclick="switchTab(3)">
+          <div class="tile-icon">💳</div>
           <label>Wallet</label>
         </div>
       </div>
 
-      <div class="staking-hero-card">
-        <div class="hero-content">
-          <h3>Stake VCT Vaults</h3>
-          <p>Earn up to 18.5% APY</p>
-          <a href="#" class="hero-cta" onclick="switchScreen(4)">Start Yield Staking →</a>
+      <div class="market-list-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 17px; font-weight: 800;">Markets Overview</h3>
+          <span style="font-size: 13px; color: var(--primary-accent); cursor: pointer;" onclick="switchTab(1)">View All</span>
         </div>
-        <div class="gold-v-badge">V</div>
-      </div>
 
-      <div class="section-title-bar">
-        <span class="title-text">Market Overview</span>
-        <span class="title-link" onclick="switchScreen(1)">View Markets</span>
-      </div>
-
-      <div class="markets-list">
-        <div class="coin-row" onclick="switchScreen(2)">
-          <div class="coin-left-group">
-            <div class="coin-icon-circle">V</div>
-            <div class="coin-name-block">
-              <h5>VictorCoin</h5>
-              <p>VCT / USDT</p>
+        <div class="coin-item-card" onclick="switchTab(2)">
+          <div class="coin-left">
+            <div class="coin-badge">V</div>
+            <div>
+              <h5 style="font-size: 14px;">VictorCoin</h5>
+              <p style="font-size: 12px; color: var(--text-muted);">VCT / USDT</p>
             </div>
           </div>
-          <div class="coin-price-block">
-            <div class="coin-val">$0.2458</div>
-            <div class="coin-stat stat-green">▲ +8.32%</div>
+          <div class="coin-right">
+            <div style="font-weight: 700; font-size: 14px;">$0.2458</div>
+            <div style="font-size: 12px; color: var(--green-positive); font-weight: 700;">▲ +8.32%</div>
           </div>
         </div>
 
-        <div class="coin-row" onclick="switchScreen(2)">
-          <div class="coin-left-group">
-            <div class="coin-icon-circle" style="color: #F7931A;">₿</div>
-            <div class="coin-name-block">
-              <h5>Bitcoin</h5>
-              <p>BTC / USDT</p>
+        <div class="coin-item-card" onclick="switchTab(2)">
+          <div class="coin-left">
+            <div class="coin-badge" style="color: #F7931A;">₿</div>
+            <div>
+              <h5 style="font-size: 14px;">Bitcoin</h5>
+              <p style="font-size: 12px; color: var(--text-muted);">BTC / USDT</p>
             </div>
           </div>
-          <div class="coin-price-block">
-            <div class="coin-val">$67,245.32</div>
-            <div class="coin-stat stat-green">▲ +3.21%</div>
+          <div class="coin-right">
+            <div style="font-weight: 700; font-size: 14px;">$67,245.32</div>
+            <div style="font-size: 12px; color: var(--green-positive); font-weight: 700;">▲ +3.21%</div>
           </div>
         </div>
-
-        <div class="coin-row" onclick="switchScreen(2)">
-          <div class="coin-left-group">
-            <div class="coin-icon-circle" style="color: #627EEA;">Ξ</div>
-            <div class="coin-name-block">
-              <h5>Ethereum</h5>
-              <p>ETH / USDT</p>
-            </div>
-          </div>
-          <div class="coin-price-block">
-            <div class="coin-val">$3,245.67</div>
-            <div class="coin-stat stat-green">▲ +2.45%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="trust-ribbon">
-        <div class="trust-item"><span>🔒</span> Cold Storage</div>
-        <div class="trust-item"><span>⚡</span> Sub-second Tx</div>
-        <div class="trust-item"><span>%</span> 0.05% Fee Rate</div>
-        <div class="trust-item"><span>🛡️</span> KYC Tier 3</div>
       </div>
     </div>
 
     <!-- SCREEN 1: MARKET -->
-    <div id="screenMarket" class="app-screen">
+    <div id="screenMarket" class="screen-view">
       <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Institutional Markets</h2>
-        <input type="text" placeholder="Search Cryptocurrencies..." style="width: 100%; padding: 14px; background: var(--surface-card); border: 1px solid var(--border-gold); border-radius: 12px; color: #fff; margin-bottom: 16px; outline: none;">
-        <div class="markets-list" style="padding: 0;">
-          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div><div class="coin-price-block"><div>$0.2458</div><div class="stat-green">+8.32%</div></div></div>
-          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle" style="color: #F7931A;">₿</div><div><h5>Bitcoin</h5><p>BTC</p></div></div><div class="coin-price-block"><div>$67,245.32</div><div class="stat-green">+3.21%</div></div></div>
-          <div class="coin-row" onclick="switchScreen(2)"><div class="coin-left-group"><div class="coin-icon-circle" style="color: #627EEA;">Ξ</div><div><h5>Ethereum</h5><p>ETH</p></div></div><div class="coin-price-block"><div>$3,245.67</div><div class="stat-green">+2.45%</div></div></div>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Markets</h2>
+        <div class="market-list-section" style="padding: 0;">
+          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div><div class="coin-right"><div>$0.2458</div><div style="color: var(--green-positive);">+8.32%</div></div></div>
+          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge" style="color: #F7931A;">₿</div><div><h5>Bitcoin</h5><p>BTC</p></div></div><div class="coin-right"><div>$67,245.32</div><div style="color: var(--green-positive);">+3.21%</div></div></div>
+          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge" style="color: #627EEA;">Ξ</div><div><h5>Ethereum</h5><p>ETH</p></div></div><div class="coin-right"><div>$3,245.67</div><div style="color: var(--green-positive);">+2.45%</div></div></div>
         </div>
       </div>
     </div>
 
-    <!-- SCREEN 2: TRADE -->
-    <div id="screenTrade" class="app-screen">
+    <!-- SCREEN 2: TRADE & ORDER BOOK -->
+    <div id="screenTrade" class="screen-view">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800;">Trade VCT / USDT</h2>
-        <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 16px 0;">$0.2458 ▲ +8.32%</p>
-        <div class="gold-glass-card" style="margin: 0 0 18px 0; height: 200px; padding: 10px;">
-          <canvas id="liveChart"></canvas>
+        <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;">$0.2458 ▲ +8.32%</p>
+        
+        <div class="glass-card" style="margin: 0 0 16px 0; height: 180px; padding: 10px;">
+          <canvas id="tradeChartCanvas"></canvas>
         </div>
-        <div class="gold-glass-card" style="margin: 0;">
-          <label style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Amount (VCT)</label>
-          <input type="number" id="tradeAmtInput" value="100" style="width: 100%; padding: 14px; background: var(--bg-main); border: 1px solid var(--border-gold); border-radius: 10px; color: #fff; margin: 8px 0 16px 0; font-size: 16px; outline: none;">
-          <button class="gold-btn-solid" style="background: var(--green-positive);" onclick="executeTradeOrder('buy')">EXECUTE BUY ORDER</button>
+
+        <!-- Order Book Depth Preview -->
+        <div class="orderbook-card">
+          <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Live Order Book Depth</h4>
+          <div class="orderbook-row" style="color: var(--green-positive);"><span>BUY 0.2458</span><span>12,500 VCT</span></div>
+          <div class="orderbook-row" style="color: var(--green-positive);"><span>BUY 0.2455</span><span>45,000 VCT</span></div>
+          <div class="orderbook-row" style="color: var(--red-negative);"><span>SELL 0.2460</span><span>8,200 VCT</span></div>
+          <div class="orderbook-row" style="color: var(--red-negative);"><span>SELL 0.2465</span><span>30,000 VCT</span></div>
+        </div>
+
+        <div class="glass-card" style="margin: 16px 0 0 0;">
+          <label style="font-size: 12px; color: var(--text-muted);">Amount (VCT)</label>
+          <input type="number" id="tradeAmt" value="100" style="width: 100%; padding: 12px; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff; margin: 6px 0 14px 0;">
+          <button class="gold-btn" style="background: var(--green-positive);" onclick="executeTrade('buy')">BUY VCT NOW</button>
         </div>
       </div>
     </div>
 
     <!-- SCREEN 3: WALLET -->
-    <div id="screenWallet" class="app-screen">
+    <div id="screenWallet" class="screen-view">
       <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Secure Custody Wallet</h2>
-        <div class="gold-glass-card" style="margin: 0 0 16px 0;">
-          <p style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Deposit Address</p>
-          <p style="color: var(--primary-gold); font-size: 13px; font-weight: 700; word-break: break-all; margin-top: 4px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Wallet</h2>
+        <div class="glass-card" style="margin: 0 0 16px 0;">
+          <p style="font-size: 11px; color: var(--text-muted);">Deposit Address</p>
+          <p style="color: var(--primary-accent); font-size: 13px; font-weight: 700; word-break: break-all; margin-top: 4px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
         </div>
-        <h4 style="margin-bottom: 10px;">Supported Fiat Payment Rails</h4>
-        <p style="font-size: 13px; color: var(--text-muted);">UPI Instant • Razorpay • Paytm • PhonePe • SEPA • Cards</p>
+        <h4 style="margin-bottom: 10px;">Payment Gateways</h4>
+        <p style="font-size: 13px; color: var(--text-muted);">UPI • Razorpay • Paytm • PhonePe • Bank Transfer</p>
       </div>
     </div>
 
     <!-- SCREEN 4: OWNER GOVERNANCE -->
-    <div id="screenOwner" class="app-screen">
+    <div id="screenOwner" class="screen-view">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">👑 Owner Governance Center</h2>
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px;">Executive Governance & Commission Management</p>
-        <div class="gold-glass-card" style="margin: 0; border-color: var(--green-positive);">
+        <div class="glass-card" style="margin: 14px 0 0 0; border-color: var(--green-positive);">
           <h4 style="color: var(--green-positive);">Owner Royalty & Commissions</h4>
-          <p style="font-size: 14px; margin-top: 10px;">Trade Cut (5% Rate): <strong>458,900 VCT</strong> ($112,797 USD)</p>
-          <p style="font-size: 14px; margin-top: 6px;">Mining Tax (5% Rate): <strong>124,500 VCT</strong> ($30,602 USD)</p>
-          <button class="gold-btn-solid" style="margin-top: 18px;" onclick="showToast('Swept Owner Commissions to Wallet Successfully!')">WITHDRAW COMMISSIONS TO WALLET</button>
+          <p style="font-size: 13px; margin-top: 8px;">Trade Fee Cuts (5%): <strong>458,900 VCT</strong> ($112,797 USD)</p>
+          <p style="font-size: 13px; margin-top: 4px;">Mining Tax (5%): <strong>124,500 VCT</strong> ($30,602 USD)</p>
+          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Swept Owner Commissions to Wallet!')">WITHDRAW COMMISSIONS</button>
         </div>
       </div>
     </div>
 
     <!-- SCREEN MINING -->
-    <div id="screenMining" class="app-screen">
+    <div id="screenMining" class="screen-view">
       <div style="padding: 18px;">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud Proof-of-Stake Mining</h2>
-        <div class="gold-glass-card" style="margin: 14px 0;">
-          <p style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Active Hashrate</p>
-          <h3 style="font-size: 32px; color: var(--primary-gold); font-weight: 800; margin: 4px 0;">45.8 MH/s</h3>
-          <p style="font-size: 13px; color: var(--green-positive);">Yield: ~24.7 VCT / day</p>
-          <button class="gold-btn-solid" style="margin-top: 16px;" onclick="showToast('Claimed +12.45 Mined VCT to Wallet (5% Owner Tax applied)')">CLAIM MINED VCT</button>
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud PoS Mining</h2>
+        <div class="glass-card" style="margin: 14px 0 0 0;">
+          <p style="font-size: 12px; color: var(--text-muted);">Mining Speed</p>
+          <h3 style="font-size: 28px; color: var(--primary-accent); font-weight: 800;">45.8 MH/s (Active)</h3>
+          <p style="font-size: 13px; color: var(--green-positive); margin-top: 4px;">Yield: ~24.7 VCT / day</p>
+          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Claimed Mined VCT rewards to wallet (5% owner tax applied)')">CLAIM MINED VCT</button>
         </div>
       </div>
     </div>
 
     <!-- SCREEN REWARDS -->
-    <div id="screenRewards" class="app-screen">
+    <div id="screenRewards" class="screen-view">
       <div style="padding: 18px;">
-        <div class="gold-glass-card" style="margin: 0; border-color: var(--primary-gold); background: linear-gradient(145deg, #241E0D 0%, #0F0D07 100%);">
-          <p style="color: var(--primary-gold); font-weight: 800; text-transform: uppercase; font-size: 12px;">VictorCoin Hub</p>
+        <div class="glass-card" style="margin: 0; border-color: var(--primary-accent);">
+          <p style="color: var(--primary-accent); font-weight: 800;">VictorCoin Hub</p>
           <h2 style="font-size: 26px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
-          <h1 style="font-size: 46px; font-weight: 900; color: var(--primary-gold); margin: 6px 0;">$5,000</h1>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Special promotion for registered users</p>
-          <button class="gold-btn-solid" onclick="showToast('Welcome Bonus Claimed!')">CLAIM WELCOME BONUS</button>
+          <h1 style="font-size: 42px; font-weight: 900; color: var(--primary-accent);">$5,000</h1>
+          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Welcome Bonus Claimed!')">CLAIM WELCOME BONUS</button>
         </div>
       </div>
     </div>
 
-    <!-- Fixed Navigation Bar -->
-    <nav class="bottom-tab-bar">
-      <div class="nav-tab-item active" onclick="switchScreen(0)">
-        <span class="tab-icon">🏠</span>
+    <!-- Fixed Bottom Nav -->
+    <nav class="bottom-nav">
+      <div class="nav-tab active" onclick="switchTab(0)">
+        <span style="font-size: 20px;">🏠</span>
         <span>Home</span>
       </div>
-      <div class="nav-tab-item" onclick="switchScreen(1)">
-        <span class="tab-icon">📊</span>
+      <div class="nav-tab" onclick="switchTab(1)">
+        <span style="font-size: 20px;">📊</span>
         <span>Markets</span>
       </div>
-      <div class="center-action-v" onclick="switchScreen(2)" title="Trade Terminal">V</div>
-      <div class="nav-tab-item" onclick="switchScreen(3)">
-        <span class="tab-icon">💳</span>
+      <div class="center-v-pill" onclick="switchTab(2)" title="Trade">V</div>
+      <div class="nav-tab" onclick="switchTab(3)">
+        <span style="font-size: 20px;">💳</span>
         <span>Wallet</span>
       </div>
-      <div class="nav-tab-item" onclick="switchScreen(4)">
-        <span class="tab-icon">👑</span>
+      <div class="nav-tab" onclick="switchTab(4)">
+        <span style="font-size: 20px;">👑</span>
         <span>Governance</span>
       </div>
     </nav>
@@ -823,69 +708,77 @@
   </div>
 
   <script>
-    let currentVctBal = 12458.75;
-    let isOwnerVerified = true;
+    let vctBal = 12458.75;
+    let usdtBal = 100.25;
 
-    function showToast(text) {
+    function showToast(msg) {
       const toast = document.getElementById('toast');
-      toast.innerText = text;
+      toast.innerText = msg;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3200);
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
     }
 
-    function switchScreen(index) {
-      document.querySelectorAll('.app-screen').forEach(el => el.classList.remove('active-screen'));
-      document.querySelectorAll('.nav-tab-item').forEach(el => el.classList.remove('active'));
+    function setAppTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      showToast(`Switched Theme to ${themeName.toUpperCase()}`);
+    }
 
-      if (index === 0) {
-        document.getElementById('screenHome').classList.add('active-screen');
-        document.querySelectorAll('.nav-tab-item')[0].classList.add('active');
-      } else if (index === 1) {
-        document.getElementById('screenMarket').classList.add('active-screen');
-        document.querySelectorAll('.nav-tab-item')[1].classList.add('active');
-      } else if (index === 2) {
-        document.getElementById('screenTrade').classList.add('active-screen');
-        renderLiveChart();
-      } else if (index === 3) {
-        document.getElementById('screenWallet').classList.add('active-screen');
-        document.querySelectorAll('.nav-tab-item')[2].classList.add('active');
-      } else if (index === 4) {
-        document.getElementById('screenOwner').classList.add('active-screen');
-        document.querySelectorAll('.nav-tab-item')[3].classList.add('active');
-      } else if (index === 'mining') {
-        document.getElementById('screenMining').classList.add('active-screen');
-      } else if (index === 'rewards') {
-        document.getElementById('screenRewards').classList.add('active-screen');
+    function switchTab(idx) {
+      document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+      if (idx === 0) {
+        document.getElementById('screenHome').classList.add('active');
+        document.querySelectorAll('.nav-tab')[0].classList.add('active');
+      } else if (idx === 1) {
+        document.getElementById('screenMarket').classList.add('active');
+        document.querySelectorAll('.nav-tab')[1].classList.add('active');
+      } else if (idx === 2) {
+        document.getElementById('screenTrade').classList.add('active');
+        initTradeChart();
+      } else if (idx === 3) {
+        document.getElementById('screenWallet').classList.add('active');
+        document.querySelectorAll('.nav-tab')[2].classList.add('active');
+      } else if (idx === 4) {
+        document.getElementById('screenOwner').classList.add('active');
+        document.querySelectorAll('.nav-tab')[3].classList.add('active');
+      } else if (idx === 'mining') {
+        document.getElementById('screenMining').classList.add('active');
+      } else if (idx === 'rewards') {
+        document.getElementById('screenRewards').classList.add('active');
       }
     }
 
-    function openOwnerModal() {
-      document.getElementById('ownerPinModal').style.display = 'flex';
+    function openConfigModal() { document.getElementById('balanceConfigModal').style.display = 'flex'; }
+    function closeConfigModal() { document.getElementById('balanceConfigModal').style.display = 'none'; }
+    
+    function saveCustomBalances() {
+      vctBal = parseFloat(document.getElementById('vctInput').value) || vctBal;
+      document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
+      closeConfigModal();
+      showToast("Custom Balances Updated!");
     }
 
-    function closeOwnerModal() {
-      document.getElementById('ownerPinModal').style.display = 'none';
-    }
-
+    function openOwnerModal() { document.getElementById('ownerPinModal').style.display = 'flex'; }
+    function closeOwnerModal() { document.getElementById('ownerPinModal').style.display = 'none'; }
+    
     function verifyOwnerPin() {
-      const pin = document.getElementById('pinCodeInput').value;
-      if (pin.length > 0) {
-        isOwnerVerified = true;
-        closeOwnerModal();
-        showToast("👑 GOVERNANCE CONTROLS UNLOCKED");
-        document.getElementById('userRoleSub').innerText = "👑 Owner Superuser";
-      }
+      closeOwnerModal();
+      showToast("👑 Owner Controls Unlocked!");
+      document.getElementById('userRoleSub').innerText = "👑 Owner Superuser";
     }
 
-    function executeTradeOrder(side) {
-      const val = parseFloat(document.getElementById('tradeAmtInput').value) || 100;
-      currentVctBal += val;
-      document.getElementById('vctBalDisplay').innerText = currentVctBal.toFixed(2);
-      showToast(`Market Order Executed: BUY ${val} VCT @ $0.2458`);
+    function executeTrade(side) {
+      const amt = parseFloat(document.getElementById('tradeAmt').value) || 100;
+      vctBal += amt;
+      document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
+      showToast(`Market Order: BUY ${amt} VCT @ $0.2458`);
     }
 
-    function renderLiveChart() {
-      const el = document.getElementById('liveChart');
+    function initTradeChart() {
+      const el = document.getElementById('tradeChartCanvas');
       if (!el || el.chartInstance) return;
       el.chartInstance = new Chart(el, {
         type: 'line',
@@ -897,8 +790,7 @@
             borderColor: '#00E676',
             backgroundColor: 'rgba(0, 230, 118, 0.15)',
             fill: true,
-            borderWidth: 2,
-            tension: 0.35
+            tension: 0.4
           }]
         },
         options: {
