@@ -54,6 +54,7 @@
       flex-direction: column;
     }
 
+    /* Header */
     .top-header {
       display: flex;
       align-items: center;
@@ -125,6 +126,7 @@
       border-color: var(--primary-gold);
     }
 
+    /* Glass Cards */
     .glass-card {
       background: var(--card-gradient);
       border: 1px solid var(--card-border);
@@ -208,6 +210,7 @@
       font-weight: bold;
     }
 
+    /* Grid Nav */
     .quick-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -243,6 +246,7 @@
       font-weight: 500;
     }
 
+    /* Staking Banner */
     .staking-banner {
       display: flex;
       justify-content: space-between;
@@ -290,6 +294,7 @@
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
     }
 
+    /* Section Titles */
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -309,6 +314,7 @@
       cursor: pointer;
     }
 
+    /* Coin List */
     .coin-list {
       padding: 0 18px;
       display: flex;
@@ -374,6 +380,7 @@
     .positive { color: var(--green-positive); }
     .negative { color: var(--red-negative); }
 
+    /* Features Ribbon */
     .features-ribbon {
       margin: 18px;
       background: var(--surface-color);
@@ -398,6 +405,7 @@
       font-size: 14px;
     }
 
+    /* Bottom Nav Bar */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -452,6 +460,7 @@
       transform: translateY(-10px);
     }
 
+    /* Views */
     .view-screen {
       display: none;
     }
@@ -459,6 +468,7 @@
       display: block;
     }
 
+    /* Owner PIN Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -522,6 +532,7 @@
       cursor: pointer;
     }
 
+    /* Notification Toast */
     .toast {
       position: fixed;
       top: 20px;
@@ -543,6 +554,7 @@
 
   <div id="toast" class="toast">Notice message</div>
 
+  <!-- Owner PIN Login Modal -->
   <div id="ownerPinModal" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-icon">👑</div>
@@ -558,6 +570,7 @@
 
   <div class="app-container">
 
+    <!-- Top Header -->
     <header class="top-header">
       <div class="user-profile">
         <div class="avatar"></div>
@@ -572,6 +585,7 @@
       </div>
     </header>
 
+    <!-- VIEW 0: HOME SCREEN -->
     <div id="viewHome" class="view-screen active">
       <div class="glass-card">
         <div class="balance-title-row">
@@ -676,6 +690,7 @@
       </div>
     </div>
 
+    <!-- VIEW 1: MARKET SCREEN -->
     <div id="viewMarket" class="view-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Market</h2>
@@ -697,6 +712,7 @@
       </div>
     </div>
 
+    <!-- VIEW 2: TRADE SCREEN -->
     <div id="viewTrade" class="view-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800;">Trade VCT / USDT</h2>
@@ -712,6 +728,7 @@
       </div>
     </div>
 
+    <!-- VIEW 3: WALLET SCREEN -->
     <div id="viewWallet" class="view-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">My Wallet</h2>
@@ -724,6 +741,7 @@
       </div>
     </div>
 
+    <!-- VIEW 4: STAKING / OWNER SCREEN -->
     <div id="viewOwner" class="view-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">👑 Owner Control Center</h2>
@@ -737,6 +755,7 @@
       </div>
     </div>
 
+    <!-- VIEW MINING -->
     <div id="viewMining" class="view-screen">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud PoS Mining</h2>
@@ -749,6 +768,7 @@
       </div>
     </div>
 
+    <!-- VIEW REWARDS -->
     <div id="viewRewards" class="view-screen">
       <div style="padding: 18px;">
         <div class="glass-card" style="margin: 0; border-color: var(--primary-gold); background: linear-gradient(135deg, #201B0B 0%, #0F0D06 100%);">
@@ -761,6 +781,7 @@
       </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
       <div class="nav-tab active" onclick="switchTab(0)">
         <span class="nav-tab-icon">🏠</span>
