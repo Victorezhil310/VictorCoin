@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: victorcoin_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=victor_user
+      - POSTGRES_PASSWORD=victor_password_2026
+      - POSTGRES_DB=victorcoin_db
+      - REDIS_HOST=redis
+      - OWNER_PIN_DEFAULT=888888
+      - SECRET_KEY=victorcoin_super_secret_jwt_key_2026_production
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  db:
+    image: postgres:16-alpine
+    container_name: victorcoin_db
+    environment:
+      POSTGRES_USER: victor_user
+      POSTGRES_PASSWORD: victor_password_2026
+      POSTGRES_DB: victorcoin_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    container_name: victorcoin_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+volumes:
+  postgres_data:
+  redis_data:
