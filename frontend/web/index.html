@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VictorCoin - The Future of Digital Money</title>
+  <title>VictorCoin (VCT) - 2026 Next-Gen 3D Institutional Crypto Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.net/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --bg-black: #090A0C;
-      --card-bg: #14161A;
-      --surface-light: #1E2127;
-      --gold-primary: #FFD700;
-      --gold-secondary: #E6B800;
-      --gold-dark: #B8860B;
-      --green-positive: #00E676;
-      --red-negative: #FF5252;
-      --text-white: #FFFFFF;
-      --text-gray: #8F95A0;
-      --border-gold: rgba(255, 215, 0, 0.25);
+      --bg-space: #040507;
+      --card-bg: #0E1015;
+      --card-surface: #161820;
+      --gold-24k: #FFD700;
+      --gold-light: #FFF3A3;
+      --gold-deep: #B8860B;
+      --green-glow: #00E676;
+      --red-glow: #FF5252;
+      --text-bright: #FFFFFF;
+      --text-muted: #8E94A0;
+      --border-3d-gold: rgba(255, 215, 0, 0.3);
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --card-gradient: linear-gradient(145deg, #181B22 0%, #0F1116 100%);
-      --gold-gradient: linear-gradient(135deg, #FFF099 0%, #FFD700 40%, #B8860B 100%);
-      --gold-glow: 0 0 20px rgba(255, 215, 0, 0.3);
+      --gold-gradient-3d: linear-gradient(135deg, #FFF5B8 0%, #FFD700 45%, #B8860B 85%, #664600 100%);
+      --card-gradient-3d: linear-gradient(160deg, #181B24 0%, #0B0C10 100%);
+      --shadow-3d: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.2);
     }
 
     * {
@@ -32,106 +33,100 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      background-color: #030405;
-      color: var(--text-white);
+      background-color: var(--bg-space);
+      color: var(--text-bright);
       display: flex;
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    .mobile-frame {
+    #bg3dCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .app-frame-3d {
       width: 100%;
       max-width: 440px;
-      background-color: var(--bg-black);
+      background-color: rgba(9, 10, 12, 0.92);
+      backdrop-filter: blur(20px);
       min-height: 100vh;
       position: relative;
-      padding-bottom: 90px;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+      z-index: 10;
+      padding-bottom: 95px;
+      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95);
       display: flex;
       flex-direction: column;
     }
 
-    .brand-banner {
+    .brand-header-3d {
       text-align: center;
-      padding: 16px 0 8px 0;
-      background: var(--bg-black);
+      padding: 18px 0 10px 0;
+      background: rgba(4, 5, 7, 0.9);
       border-bottom: 1px solid var(--border-subtle);
+      position: relative;
     }
 
-    .brand-logo-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .brand-v-logo {
-      width: 32px;
-      height: 32px;
-      background: var(--gold-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .brand-title-3d {
+      font-size: 22px;
       font-weight: 900;
-      color: #000;
-      font-size: 18px;
-      box-shadow: var(--gold-glow);
-    }
-
-    .brand-title {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      background: var(--gold-gradient);
+      letter-spacing: 2px;
+      background: var(--gold-gradient-3d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     }
 
-    .brand-subtitle {
+    .brand-subtitle-3d {
       font-size: 9px;
-      color: var(--text-gray);
-      letter-spacing: 2px;
+      color: var(--text-muted);
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       margin-top: 2px;
     }
 
-    .app-header {
+    .app-header-3d {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
-      background: rgba(9, 10, 12, 0.9);
-      backdrop-filter: blur(10px);
+      padding: 14px 20px;
+      background: rgba(9, 10, 12, 0.85);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
-    .header-user {
+    .user-profile-3d {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .user-avatar {
-      width: 38px;
-      height: 38px;
+    .avatar-3d {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      border: 1.5px solid var(--gold-primary);
+      border: 2px solid var(--gold-24k);
       background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb');
       background-size: cover;
       background-position: center;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
     }
 
-    .user-meta h5 {
+    .user-text-3d h5 {
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 4px;
@@ -139,39 +134,57 @@
 
     .verified-blue {
       color: #3b82f6;
-      font-size: 12px;
+      font-size: 13px;
     }
 
-    .user-meta p {
+    .user-text-3d p {
       font-size: 11px;
-      color: var(--text-gray);
+      color: var(--text-muted);
     }
 
-    .header-right-icons {
+    .header-controls-3d {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .header-icon {
-      color: var(--text-white);
-      font-size: 18px;
+    .icon-btn-3d {
+      background: var(--card-surface);
+      border: 1px solid var(--border-3d-gold);
+      color: var(--gold-24k);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .header-icon.gold-crown {
-      color: var(--gold-primary);
-      font-size: 20px;
+    .icon-btn-3d:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
     }
 
-    .main-balance-card {
-      background: var(--card-gradient);
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      padding: 20px;
-      margin: 10px 18px 16px 18px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    .card-3d {
+      background: var(--card-gradient-3d);
+      border: 1px solid var(--border-3d-gold);
+      border-radius: 24px;
+      padding: 22px;
+      margin: 12px 18px 16px 18px;
+      box-shadow: var(--shadow-3d);
       position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-3d:hover {
+      transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.35);
     }
 
     .card-top-row {
@@ -180,266 +193,287 @@
       align-items: center;
     }
 
-    .card-label {
+    .card-title-label {
       font-size: 12px;
-      color: var(--text-gray);
-      font-weight: 500;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .percentage-pill {
+    .badge-gain-3d {
       background: rgba(0, 230, 118, 0.15);
-      color: var(--green-positive);
-      padding: 3px 10px;
+      color: var(--green-glow);
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      box-shadow: 0 0 12px rgba(0, 230, 118, 0.2);
     }
 
-    .big-balance-val {
-      font-size: 30px;
-      font-weight: 800;
+    .balance-text-3d {
+      font-size: 32px;
+      font-weight: 900;
       letter-spacing: -0.5px;
-      margin: 6px 0 2px 0;
+      margin: 8px 0 2px 0;
       display: flex;
       align-items: baseline;
       gap: 6px;
     }
 
-    .symbol-gold {
-      font-size: 16px;
-      color: var(--gold-primary);
-      font-weight: 800;
+    .symbol-24k {
+      font-size: 18px;
+      color: var(--gold-24k);
+      font-weight: 900;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
 
-    .fiat-equiv {
+    .fiat-text-3d {
       font-size: 13px;
-      color: var(--text-gray);
+      color: var(--text-muted);
     }
 
-    .action-pills-row {
+    .actions-grid-3d {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 18px;
+      gap: 10px;
+      margin-top: 20px;
     }
 
-    .action-pill-btn {
-      background: var(--surface-light);
-      border: 1px solid var(--border-gold);
-      border-radius: 12px;
-      padding: 9px 0;
-      color: var(--text-white);
+    .btn-pill-3d {
+      background: var(--card-surface);
+      border: 1px solid var(--border-3d-gold);
+      border-radius: 14px;
+      padding: 10px 0;
+      color: var(--text-bright);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .action-pill-btn span.gold-icon {
-      color: var(--gold-primary);
-      font-size: 14px;
-      font-weight: bold;
+    .btn-pill-3d:hover {
+      background: rgba(255, 215, 0, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.25);
     }
 
-    .grid-four-nav {
+    .btn-pill-3d span {
+      color: var(--gold-24k);
+      font-weight: 900;
+    }
+
+    .grid-four-3d {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       padding: 0 18px 16px 18px;
     }
 
-    .grid-nav-box {
+    .tile-3d {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .nav-icon-container {
-      width: 54px;
-      height: 54px;
-      background: var(--card-gradient);
-      border: 1px solid var(--border-gold);
-      border-radius: 16px;
+    .tile-3d:hover {
+      transform: translateY(-4px);
+    }
+
+    .icon-box-3d {
+      width: 58px;
+      height: 58px;
+      background: var(--card-gradient-3d);
+      border: 1px solid var(--border-3d-gold);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold-primary);
-      font-size: 22px;
+      color: var(--gold-24k);
+      font-size: 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .grid-nav-box label {
+    .tile-3d label {
       font-size: 11px;
-      color: var(--text-white);
-      font-weight: 500;
+      color: var(--text-bright);
+      font-weight: 600;
     }
 
-    .staking-banner-card {
-      background: var(--card-gradient);
-      border: 1px solid var(--gold-primary);
-      border-radius: 20px;
-      padding: 18px 20px;
+    .staking-banner-3d {
+      background: var(--card-gradient-3d);
+      border: 1.5px solid var(--gold-24k);
+      border-radius: 24px;
+      padding: 20px;
       margin: 0 18px 16px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: var(--gold-glow);
+      box-shadow: var(--shadow-3d);
     }
 
-    .banner-info h4 {
+    .staking-info-3d h4 {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .staking-info-3d p {
+      color: var(--gold-24k);
+      font-size: 14px;
+      font-weight: 800;
+      margin: 3px 0 12px 0;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+    .staking-info-3d a {
+      color: var(--text-bright);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .coin-emblem-3d-wrapper {
+      width: 68px;
+      height: 68px;
+      position: relative;
+    }
+
+    .market-header-3d {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 18px 12px 18px;
+    }
+
+    .title-3d {
       font-size: 17px;
       font-weight: 800;
     }
 
-    .banner-info p {
-      color: var(--gold-primary);
-      font-size: 13px;
-      font-weight: 700;
-      margin: 2px 0 10px 0;
-    }
-
-    .banner-info a {
-      color: var(--text-white);
+    .link-3d {
       font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .banner-coin-3d {
-      width: 60px;
-      height: 60px;
-      background: var(--gold-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: 900;
-      color: #000;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-    }
-
-    .market-section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 18px 10px 18px;
-    }
-
-    .section-head-title {
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .section-head-link {
-      font-size: 12px;
-      color: var(--gold-primary);
+      color: var(--gold-24k);
       font-weight: 700;
       cursor: pointer;
     }
 
-    .market-rows-container {
+    .market-list-3d {
       padding: 0 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .market-coin-row {
-      background: var(--card-gradient);
+    .coin-card-3d {
+      background: var(--card-gradient-3d);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 12px 16px;
+      border-radius: 18px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .coin-left-group {
+    .coin-card-3d:hover {
+      border-color: var(--border-3d-gold);
+      transform: translateX(3px);
+    }
+
+    .coin-left-3d {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .coin-gold-badge {
-      width: 38px;
-      height: 38px;
-      background: var(--surface-light);
-      border: 1px solid var(--border-gold);
+    .coin-badge-3d {
+      width: 40px;
+      height: 40px;
+      background: var(--card-surface);
+      border: 1px solid var(--border-3d-gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      color: var(--gold-primary);
-      font-size: 15px;
+      font-weight: 900;
+      color: var(--gold-24k);
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
-    .coin-title-block h6 {
+    .coin-info-3d h6 {
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .coin-title-block p {
+    .coin-info-3d p {
       font-size: 11px;
-      color: var(--text-gray);
+      color: var(--text-muted);
     }
 
-    .coin-price-block {
+    .coin-right-3d {
       text-align: right;
     }
 
-    .coin-price-val {
+    .coin-price-3d {
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .coin-change-val {
-      font-size: 11px;
-      font-weight: 700;
+    .coin-change-3d {
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    .pos-green { color: var(--green-positive); }
+    .green-val { color: var(--green-glow); }
 
-    .bottom-trust-ribbon {
+    .trust-ribbon-3d {
       margin: 18px;
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 12px;
+      border-radius: 16px;
+      padding: 14px;
       display: flex;
       justify-content: space-around;
     }
 
-    .trust-tile {
+    .trust-item-3d {
       display: flex;
       align-items: center;
       gap: 4px;
       font-size: 10px;
-      color: var(--text-gray);
+      color: var(--text-muted);
       font-weight: 600;
     }
 
-    .trust-tile span {
-      color: var(--gold-primary);
-      font-size: 13px;
+    .trust-item-3d span {
+      color: var(--gold-24k);
+      font-size: 14px;
     }
 
-    .bottom-navigation-bar {
+    .bottom-nav-3d {
       position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
       max-width: 440px;
-      height: 72px;
-      background-color: rgba(14, 16, 20, 0.95);
-      backdrop-filter: blur(16px);
+      height: 75px;
+      background: rgba(14, 16, 21, 0.96);
+      backdrop-filter: blur(20px);
       border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
@@ -447,65 +481,72 @@
       z-index: 200;
     }
 
-    .nav-item-tab {
+    .nav-tab-3d {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
-      color: var(--text-gray);
+      gap: 4px;
+      color: var(--text-muted);
       font-size: 10px;
       cursor: pointer;
       flex: 1;
     }
 
-    .nav-item-tab.active-tab {
-      color: var(--gold-primary);
-      font-weight: 700;
+    .nav-tab-3d.active-tab-3d {
+      color: var(--gold-24k);
+      font-weight: 800;
     }
 
-    .nav-tab-icon-size {
-      font-size: 20px;
-    }
-
-    .center-raised-v-btn {
-      width: 50px;
-      height: 50px;
-      background: var(--gold-gradient);
+    .center-v-btn-3d {
+      width: 54px;
+      height: 54px;
+      background: var(--gold-gradient-3d);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
       color: #000;
       cursor: pointer;
-      box-shadow: var(--gold-glow);
-      transform: translateY(-8px);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+      transform: translateY(-10px);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .screen-panel { display: none; }
-    .screen-panel.active-panel { display: block; }
+    .center-v-btn-3d:hover {
+      transform: translateY(-14px) scale(1.08);
+    }
 
-    .gold-btn-action {
+    .screen-container-3d { display: none; }
+    .screen-container-3d.active-screen-3d { display: block; }
+
+    .gold-btn-3d {
       width: 100%;
       padding: 14px;
-      background: var(--gold-gradient);
+      background: var(--gold-gradient-3d);
       color: #000;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 14px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+      transition: transform 0.2s;
     }
 
-    .modal-overlay-bg {
+    .gold-btn-3d:hover {
+      transform: translateY(-2px);
+    }
+
+    .modal-overlay-3d {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(12px);
       z-index: 999;
       display: none;
       align-items: center;
@@ -513,28 +554,43 @@
       padding: 20px;
     }
 
-    .modal-popup-box {
+    .modal-dialog-3d {
       background: var(--card-bg);
-      border: 1px solid var(--gold-primary);
-      border-radius: 24px;
-      padding: 24px;
+      border: 1.5px solid var(--gold-24k);
+      border-radius: 26px;
+      padding: 26px;
       width: 100%;
-      max-width: 340px;
+      max-width: 350px;
       text-align: center;
+      box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
     }
 
-    .toast-banner {
+    .pin-input-3d {
+      width: 100%;
+      padding: 14px;
+      font-size: 24px;
+      letter-spacing: 10px;
+      text-align: center;
+      background: var(--bg-space);
+      border: 1px solid var(--border-3d-gold);
+      border-radius: 12px;
+      color: var(--gold-24k);
+      margin: 16px 0;
+      outline: none;
+    }
+
+    .toast-banner-3d {
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--gold-primary);
+      background: var(--gold-24k);
       color: #000;
-      padding: 12px 22px;
+      padding: 12px 24px;
       border-radius: 30px;
       font-weight: 800;
-      font-size: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      font-size: 13px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
       z-index: 1000;
       display: none;
     }
@@ -542,229 +598,227 @@
 </head>
 <body>
 
-  <div id="toast" class="toast-banner"></div>
+  <canvas id="bg3dCanvas"></canvas>
 
-  <div id="ownerPinModal" class="modal-overlay-bg">
-    <div class="modal-popup-box">
-      <div style="font-size: 32px; margin-bottom: 6px;">👑</div>
-      <h3 style="font-size: 18px; font-weight: 800;">Owner Security Login</h3>
-      <p style="font-size: 11px; color: var(--text-gray); margin-top: 4px;">Enter PIN for owner controls</p>
-      <input type="password" id="pinCodeInput" placeholder="••••••" maxlength="6" style="width: 100%; padding: 12px; font-size: 22px; letter-spacing: 8px; text-align: center; background: var(--bg-black); border: 1px solid var(--border-gold); border-radius: 10px; color: var(--gold-primary); margin: 14px 0; outline: none;">
-      <button class="gold-btn-action" onclick="verifyOwnerPin()">UNLOCK OWNER CONTROLS</button>
-      <p style="font-size: 11px; color: var(--text-gray); margin-top: 12px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
+  <div id="toast" class="toast-banner-3d"></div>
+
+  <div id="ownerPinModal" class="modal-overlay-3d">
+    <div class="modal-dialog-3d">
+      <div style="font-size: 34px; margin-bottom: 6px;">👑</div>
+      <h3 style="font-size: 20px; font-weight: 900;">Owner Security Login</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enter secret PIN to unlock owner controls</p>
+      <input type="password" id="pinCodeInput" class="pin-input-3d" placeholder="••••••" maxlength="6">
+      <button class="gold-btn-3d" onclick="verifyOwnerPin()">UNLOCK OWNER CONTROLS</button>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 14px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
     </div>
   </div>
 
-  <div class="mobile-frame">
+  <div class="app-frame-3d">
 
-    <div class="brand-banner">
-      <div class="brand-logo-row">
-        <div class="brand-v-logo">V</div>
-        <div class="brand-title">VICTORCOIN</div>
-      </div>
-      <div class="brand-subtitle">THE FUTURE OF DIGITAL MONEY</div>
+    <div class="brand-header-3d">
+      <div class="brand-title-3d">VICTORCOIN</div>
+      <div class="brand-subtitle-3d">THE FUTURE OF DIGITAL MONEY</div>
     </div>
 
-    <header class="app-header">
-      <div class="header-user">
-        <div class="user-avatar"></div>
-        <div class="user-meta">
+    <header class="app-header-3d">
+      <div class="user-profile-3d">
+        <div class="avatar-3d"></div>
+        <div class="user-text-3d">
           <h5>Hello, Victor <span class="verified-blue">✓</span></h5>
-          <p id="userSubtext">Welcome Back!</p>
+          <p id="userRoleSub">Welcome Back!</p>
         </div>
       </div>
-      <div class="header-right-icons">
-        <span class="header-icon gold-crown" onclick="openOwnerModal()" title="Owner Login PIN">👑</span>
-        <span class="header-icon" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</span>
-        <span class="header-icon" onclick="showToast('QR Scanner Ready')">⛶</span>
+      <div class="header-controls-3d">
+        <div class="icon-btn-3d" onclick="openOwnerModal()" title="Owner Login PIN">👑</div>
+        <div class="icon-btn-3d" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</div>
+        <div class="icon-btn-3d" onclick="showToast('QR Scanner Active')">⛶</div>
       </div>
     </header>
 
-    <div id="screenHome" class="screen-panel active-panel">
-      <div class="main-balance-card">
+    <div id="screenHome" class="screen-container-3d active-screen-3d">
+      
+      <div class="card-3d">
         <div class="card-top-row">
-          <span class="card-label">Total Balance</span>
-          <span class="percentage-pill">▲ 12.5% (24h)</span>
+          <span class="card-title-label">Total Balance</span>
+          <span class="badge-gain-3d">▲ 12.5% (24h)</span>
         </div>
-        <div class="big-balance-val">
+        <div class="balance-text-3d">
           <span id="vctBalDisplay">12,458.75</span>
-          <span class="symbol-gold">VCT</span>
+          <span class="symbol-24k">VCT</span>
         </div>
-        <div class="fiat-equiv">≈ $8,742.58 USD</div>
+        <div class="fiat-text-3d">≈ $8,742.58 USD</div>
 
-        <div class="action-pills-row">
-          <div class="action-pill-btn" onclick="switchPanel(3)"><span class="gold-icon">↑</span> Send</div>
-          <div class="action-pill-btn" onclick="switchPanel(3)"><span class="gold-icon">↓</span> Receive</div>
-          <div class="action-pill-btn" onclick="switchPanel(2)"><span class="gold-icon">+</span> Buy</div>
-          <div class="action-pill-btn" onclick="switchPanel(2)"><span class="gold-icon">⇄</span> Swap</div>
+        <div class="actions-grid-3d">
+          <div class="btn-pill-3d" onclick="switchTab(3)"><span>↑</span> Send</div>
+          <div class="btn-pill-3d" onclick="switchTab(3)"><span>↓</span> Receive</div>
+          <div class="btn-pill-3d" onclick="switchTab(2)"><span>+</span> Buy</div>
+          <div class="btn-pill-3d" onclick="switchTab(2)"><span>⇄</span> Swap</div>
         </div>
       </div>
 
-      <div class="grid-four-nav">
-        <div class="grid-nav-box" onclick="switchPanel(3)">
-          <div class="nav-icon-container">💳</div>
+      <div class="grid-four-3d">
+        <div class="tile-3d" onclick="switchTab(3)">
+          <div class="icon-box-3d">💳</div>
           <label>Wallet</label>
         </div>
-        <div class="grid-nav-box" onclick="switchPanel(4)">
-          <div class="nav-icon-container">💰</div>
+        <div class="tile-3d" onclick="switchTab(4)">
+          <div class="icon-box-3d">💰</div>
           <label>Staking</label>
         </div>
-        <div class="grid-nav-box" onclick="switchPanel('rewards')">
-          <div class="nav-icon-container">🎁</div>
+        <div class="tile-3d" onclick="switchTab('rewards')">
+          <div class="icon-box-3d">🎁</div>
           <label>Rewards</label>
         </div>
-        <div class="grid-nav-box" onclick="switchPanel('mining')">
-          <div class="nav-icon-container">⚡</div>
+        <div class="tile-3d" onclick="switchTab('mining')">
+          <div class="icon-box-3d">⚡</div>
           <label>Mining</label>
         </div>
       </div>
 
-      <div class="staking-banner-card">
-        <div class="banner-info">
+      <div class="staking-banner-3d">
+        <div class="staking-info-3d">
           <h4>Stake VCT</h4>
           <p>Earn up to 18.5% APY</p>
-          <a href="#" onclick="switchPanel(4)">Start Staking →</a>
+          <a href="#" onclick="switchTab(4)">Start Staking →</a>
         </div>
-        <div class="banner-coin-3d">V</div>
+        <div class="coin-emblem-3d-wrapper" id="coin3dContainer"></div>
       </div>
 
-      <div class="market-section-header">
-        <span class="section-head-title">Market Overview</span>
-        <span class="section-head-link" onclick="switchPanel(1)">View All</span>
+      <div class="market-header-3d">
+        <span class="title-3d">Market Overview</span>
+        <span class="link-3d" onclick="switchTab(1)">View All</span>
       </div>
 
-      <div class="market-rows-container">
-        <div class="market-coin-row" onclick="switchPanel(2)">
-          <div class="coin-left-group">
-            <div class="coin-gold-badge">V</div>
-            <div class="coin-title-block">
+      <div class="market-list-3d">
+        <div class="coin-card-3d" onclick="switchTab(2)">
+          <div class="coin-left-3d">
+            <div class="coin-badge-3d">V</div>
+            <div class="coin-info-3d">
               <h6>VictorCoin</h6>
               <p>VCT / USDT</p>
             </div>
           </div>
-          <div class="coin-price-block">
-            <div class="coin-price-val">$0.2458</div>
-            <div class="coin-change-val pos-green">▲ +8.32%</div>
+          <div class="coin-right-3d">
+            <div class="coin-price-3d">$0.2458</div>
+            <div class="coin-change-3d green-val">▲ +8.32%</div>
           </div>
         </div>
 
-        <div class="market-coin-row" onclick="switchPanel(2)">
-          <div class="coin-left-group">
-            <div class="coin-gold-badge" style="color: #F7931A;">₿</div>
-            <div class="coin-title-block">
+        <div class="coin-card-3d" onclick="switchTab(2)">
+          <div class="coin-left-3d">
+            <div class="coin-badge-3d" style="color: #F7931A;">₿</div>
+            <div class="coin-info-3d">
               <h6>Bitcoin</h6>
               <p>BTC / USDT</p>
             </div>
           </div>
-          <div class="coin-price-block">
-            <div class="coin-price-val">$67,245.32</div>
-            <div class="coin-change-val pos-green">▲ +3.21%</div>
+          <div class="coin-right-3d">
+            <div class="coin-price-3d">$67,245.32</div>
+            <div class="coin-change-3d green-val">▲ +3.21%</div>
           </div>
         </div>
       </div>
 
-      <div class="bottom-trust-ribbon">
-        <div class="trust-tile"><span>🔒</span> Secure Wallet</div>
-        <div class="trust-tile"><span>⚡</span> Fast Tx</div>
-        <div class="trust-tile"><span>%</span> Low Fees</div>
-        <div class="trust-tile"><span>🛡️</span> KYC Verified</div>
-        <div class="trust-tile"><span>🎧</span> 24/7 Support</div>
+      <div class="trust-ribbon-3d">
+        <div class="trust-item-3d"><span>🔒</span> Secure Wallet</div>
+        <div class="trust-item-3d"><span>⚡</span> Fast Tx</div>
+        <div class="trust-item-3d"><span>%</span> Low Fees</div>
+        <div class="trust-item-3d"><span>🛡️</span> KYC Verified</div>
+        <div class="trust-item-3d"><span>🎧</span> 24/7 Support</div>
       </div>
     </div>
 
-    <div id="screenMarket" class="screen-panel">
-      <div style="padding: 16px;">
-        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">Market</h3>
-        <input type="text" placeholder="Q Search Coin" style="width: 100%; padding: 12px; background: var(--card-bg); border: 1px solid var(--border-gold); border-radius: 12px; color: #fff; margin-bottom: 14px; outline: none;">
-        <div class="market-rows-container" style="padding: 0;">
-          <div class="market-coin-row" onclick="switchPanel(2)"><div class="coin-left-group"><div class="coin-gold-badge">V</div><div><h6>VictorCoin</h6><p>VCT</p></div></div><div class="coin-price-block"><div>$0.2458</div><div class="pos-green">+8.32%</div></div></div>
-          <div class="market-coin-row" onclick="switchPanel(2)"><div class="coin-left-group"><div class="coin-gold-badge" style="color: #F7931A;">₿</div><div><h6>Bitcoin</h6><p>BTC</p></div></div><div class="coin-price-block"><div>$67,245.32</div><div class="pos-green">+3.21%</div></div></div>
-          <div class="market-coin-row" onclick="switchPanel(2)"><div class="coin-left-group"><div class="coin-gold-badge" style="color: #627EEA;">Ξ</div><div><h6>Ethereum</h6><p>ETH</p></div></div><div class="coin-price-block"><div>$3,245.67</div><div class="pos-green">+2.45%</div></div></div>
+    <div id="screenMarket" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 14px;">Market</h3>
+        <input type="text" placeholder="Q Search Coin" style="width: 100%; padding: 14px; background: var(--card-bg); border: 1px solid var(--border-3d-gold); border-radius: 14px; color: #fff; margin-bottom: 16px; outline: none;">
+        <div class="market-list-3d" style="padding: 0;">
+          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d">V</div><div><h6>VictorCoin</h6><p>VCT</p></div></div><div class="coin-right-3d"><div>$0.2458</div><div class="green-val">+8.32%</div></div></div>
+          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d" style="color: #F7931A;">₿</div><div><h6>Bitcoin</h6><p>BTC</p></div></div><div class="coin-right-3d"><div>$67,245.32</div><div class="green-val">+3.21%</div></div></div>
+          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d" style="color: #627EEA;">Ξ</div><div><h6>Ethereum</h6><p>ETH</p></div></div><div class="coin-right-3d"><div>$3,245.67</div><div class="green-val">+2.45%</div></div></div>
         </div>
       </div>
     </div>
 
-    <div id="screenTrade" class="screen-panel">
-      <div style="padding: 16px;">
-        <h3 style="font-size: 20px; font-weight: 800;">Trade</h3>
-        <p style="color: var(--gold-primary); font-size: 14px; font-weight: 700; margin-top: 2px;">VCT / USDT</p>
-        <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 12px 0;">0.2458 ▲ +8.32%</p>
+    <div id="screenTrade" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <h3 style="font-size: 22px; font-weight: 900;">Trade</h3>
+        <p style="color: var(--gold-24k); font-size: 14px; font-weight: 800; margin-top: 2px;">VCT / USDT</p>
+        <p style="color: var(--green-glow); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;">0.2458 ▲ +8.32%</p>
         
-        <div class="main-balance-card" style="margin: 0 0 14px 0; height: 180px; padding: 10px;">
-          <canvas id="tradeCanvasChart"></canvas>
+        <div class="card-3d" style="margin: 0 0 16px 0; height: 190px; padding: 10px;">
+          <canvas id="tradeChartCanvas"></canvas>
         </div>
 
-        <div class="main-balance-card" style="margin: 0;">
-          <label style="font-size: 11px; color: var(--text-gray);">Price (USDT)</label>
-          <input type="number" id="tradePriceInput" value="0.2458" style="width: 100%; padding: 10px; background: var(--bg-black); border: 1px solid var(--border-gold); border-radius: 8px; color: #fff; margin: 4px 0 10px 0;">
-          <label style="font-size: 11px; color: var(--text-gray);">Amount (VCT)</label>
-          <input type="number" id="tradeAmountInput" value="100" style="width: 100%; padding: 10px; background: var(--bg-black); border: 1px solid var(--border-gold); border-radius: 8px; color: #fff; margin: 4px 0 14px 0;">
-          <button class="gold-btn-action" style="background: var(--green-positive);" onclick="executeTradeOrder('buy')">Buy VCT</button>
+        <div class="card-3d" style="margin: 0;">
+          <label style="font-size: 11px; color: var(--text-muted);">Amount (VCT)</label>
+          <input type="number" id="tradeAmtInput" value="100" style="width: 100%; padding: 12px; background: var(--bg-space); border: 1px solid var(--border-3d-gold); border-radius: 10px; color: #fff; margin: 6px 0 14px 0;">
+          <button class="gold-btn-3d" style="background: var(--green-glow);" onclick="executeTradeOrder('buy')">Buy VCT</button>
         </div>
       </div>
     </div>
 
-    <div id="screenWallet" class="screen-panel">
-      <div style="padding: 16px;">
-        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">Wallet</h3>
-        <div class="main-balance-card" style="margin: 0 0 14px 0;">
-          <p style="font-size: 11px; color: var(--text-gray);">Wallet Address</p>
-          <p style="color: var(--gold-primary); font-size: 12px; font-weight: 700; word-break: break-all; margin-top: 4px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
+    <div id="screenWallet" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 14px;">Wallet</h3>
+        <div class="card-3d" style="margin: 0;">
+          <p style="font-size: 12px; color: var(--text-muted);">Wallet Address</p>
+          <p style="color: var(--gold-24k); font-size: 13px; font-weight: 800; word-break: break-all; margin-top: 6px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
         </div>
       </div>
     </div>
 
-    <div id="screenOwner" class="screen-panel">
-      <div style="padding: 16px;">
-        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">👑 Owner Governance Center</h3>
-        <div class="main-balance-card" style="margin: 12px 0 0 0; border-color: var(--green-positive);">
-          <h5 style="color: var(--green-positive); font-size: 15px;">Owner Royalty & Commissions</h5>
-          <p style="font-size: 13px; margin-top: 8px;">Trade Fee Cuts (5%): <strong>458,900 VCT</strong> ($112,797 USD)</p>
+    <div id="screenOwner" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 4px;">👑 Owner Governance Center</h3>
+        <div class="card-3d" style="margin: 14px 0 0 0; border-color: var(--green-glow);">
+          <h5 style="color: var(--green-glow); font-size: 16px;">Owner Royalty & Commissions</h5>
+          <p style="font-size: 13px; margin-top: 10px;">Trade Fee Cuts (5%): <strong>458,900 VCT</strong> ($112,797 USD)</p>
           <p style="font-size: 13px; margin-top: 4px;">Mining Tax (5%): <strong>124,500 VCT</strong> ($30,602 USD)</p>
-          <button class="gold-btn-action" style="margin-top: 14px;" onclick="showToast('Swept Owner Commissions to Wallet!')">WITHDRAW COMMISSIONS</button>
+          <button class="gold-btn-3d" style="margin-top: 16px;" onclick="showToast('Swept Owner Commissions to Wallet!')">WITHDRAW COMMISSIONS</button>
         </div>
       </div>
     </div>
 
-    <div id="screenMining" class="screen-panel">
-      <div style="padding: 16px;">
-        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 4px;">⚡ Cloud PoS Mining</h3>
-        <div class="main-balance-card" style="margin: 12px 0 0 0;">
-          <p style="font-size: 11px; color: var(--text-gray);">Active Mining Speed</p>
-          <h2 style="font-size: 28px; color: var(--gold-primary); font-weight: 800;">45.8 MH/s</h2>
-          <button class="gold-btn-action" style="margin-top: 14px;" onclick="showToast('Claimed Mined VCT rewards to wallet')">CLAIM MINED VCT</button>
+    <div id="screenMining" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 4px;">⚡ Cloud PoS Mining</h3>
+        <div class="card-3d" style="margin: 14px 0 0 0;">
+          <p style="font-size: 12px; color: var(--text-muted);">Active Mining Speed</p>
+          <h2 style="font-size: 32px; color: var(--gold-24k); font-weight: 900; margin: 4px 0;">45.8 MH/s</h2>
+          <button class="gold-btn-3d" style="margin-top: 16px;" onclick="showToast('Claimed Mined VCT rewards to wallet')">CLAIM MINED VCT</button>
         </div>
       </div>
     </div>
 
-    <div id="screenRewards" class="screen-panel">
-      <div style="padding: 16px;">
-        <div class="main-balance-card" style="margin: 0; border-color: var(--gold-primary); background: linear-gradient(145deg, #201B0B 0%, #0F0D06 100%);">
-          <p style="color: var(--gold-primary); font-weight: 800; font-size: 12px;">VictorCoin Hub</p>
-          <h2 style="font-size: 24px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
-          <h1 style="font-size: 40px; font-weight: 900; color: var(--gold-primary); margin: 4px 0;">$5,000</h1>
-          <p style="font-size: 12px; color: var(--text-gray); margin-bottom: 14px;">Special offer for new registered users</p>
-          <button class="gold-btn-action" onclick="showToast('Welcome Bonus Claimed!')">Claim Welcome Bonus</button>
+    <div id="screenRewards" class="screen-container-3d">
+      <div style="padding: 18px;">
+        <div class="card-3d" style="margin: 0; border-color: var(--gold-24k); background: linear-gradient(160deg, #241E0D 0%, #0F0D07 100%);">
+          <p style="color: var(--gold-24k); font-weight: 900; font-size: 12px;">VictorCoin Hub</p>
+          <h2 style="font-size: 26px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
+          <h1 style="font-size: 44px; font-weight: 900; color: var(--gold-24k); margin: 6px 0;">$5,000</h1>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Special offer for new registered users</p>
+          <button class="gold-btn-3d" onclick="showToast('Welcome Bonus Claimed!')">Claim Welcome Bonus</button>
         </div>
       </div>
     </div>
 
-    <nav class="bottom-navigation-bar">
-      <div class="nav-item-tab active-tab" onclick="switchPanel(0)">
-        <span class="nav-tab-icon-size">🏠</span>
+    <nav class="bottom-nav-3d">
+      <div class="nav-tab-3d active-tab-3d" onclick="switchTab(0)">
+        <span style="font-size: 20px;">🏠</span>
         <span>Home</span>
       </div>
-      <div class="nav-item-tab" onclick="switchPanel(1)">
-        <span class="nav-tab-icon-size">📊</span>
+      <div class="nav-tab-3d" onclick="switchTab(1)">
+        <span style="font-size: 20px;">📊</span>
         <span>Market</span>
       </div>
-      <div class="center-raised-v-btn" onclick="switchPanel(2)" title="Trade">V</div>
-      <div class="nav-item-tab" onclick="switchPanel(2)">
-        <span class="nav-tab-icon-size">⇄</span>
+      <div class="center-v-btn-3d" onclick="switchTab(2)" title="Trade">V</div>
+      <div class="nav-tab-3d" onclick="switchTab(2)">
+        <span style="font-size: 20px;">⇄</span>
         <span>Trade</span>
       </div>
-      <div class="nav-item-tab" onclick="switchPanel(4)">
-        <span class="nav-tab-icon-size">👤</span>
+      <div class="nav-tab-3d" onclick="switchTab(4)">
+        <span style="font-size: 20px;">👤</span>
         <span>Profile</span>
       </div>
     </nav>
@@ -774,36 +828,36 @@
   <script>
     let vctBal = 12458.75;
 
-    function showToast(text) {
+    function showToast(msg) {
       const toast = document.getElementById('toast');
-      toast.innerText = text;
+      toast.innerText = msg;
       toast.style.display = 'block';
       setTimeout(() => { toast.style.display = 'none'; }, 3000);
     }
 
-    function switchPanel(panelIndex) {
-      document.querySelectorAll('.screen-panel').forEach(p => p.classList.remove('active-panel'));
-      document.querySelectorAll('.nav-item-tab').forEach(t => t.classList.remove('active-tab'));
+    function switchTab(idx) {
+      document.querySelectorAll('.screen-container-3d').forEach(s => s.classList.remove('active-screen-3d'));
+      document.querySelectorAll('.nav-tab-3d').forEach(t => t.classList.remove('active-tab-3d'));
 
-      if (panelIndex === 0) {
-        document.getElementById('screenHome').classList.add('active-panel');
-        document.querySelectorAll('.nav-item-tab')[0].classList.add('active-tab');
-      } else if (panelIndex === 1) {
-        document.getElementById('screenMarket').classList.add('active-panel');
-        document.querySelectorAll('.nav-item-tab')[1].classList.add('active-tab');
-      } else if (panelIndex === 2) {
-        document.getElementById('screenTrade').classList.add('active-panel');
-        document.querySelectorAll('.nav-item-tab')[2].classList.add('active-tab');
+      if (idx === 0) {
+        document.getElementById('screenHome').classList.add('active-screen-3d');
+        document.querySelectorAll('.nav-tab-3d')[0].classList.add('active-tab-3d');
+      } else if (idx === 1) {
+        document.getElementById('screenMarket').classList.add('active-screen-3d');
+        document.querySelectorAll('.nav-tab-3d')[1].classList.add('active-tab-3d');
+      } else if (idx === 2) {
+        document.getElementById('screenTrade').classList.add('active-screen-3d');
+        document.querySelectorAll('.nav-tab-3d')[2].classList.add('active-tab-3d');
         initTradeChart();
-      } else if (panelIndex === 3) {
-        document.getElementById('screenWallet').classList.add('active-panel');
-      } else if (panelIndex === 4) {
-        document.getElementById('screenOwner').classList.add('active-panel');
-        document.querySelectorAll('.nav-item-tab')[3].classList.add('active-tab');
-      } else if (panelIndex === 'mining') {
-        document.getElementById('screenMining').classList.add('active-panel');
-      } else if (panelIndex === 'rewards') {
-        document.getElementById('screenRewards').classList.add('active-panel');
+      } else if (idx === 3) {
+        document.getElementById('screenWallet').classList.add('active-screen-3d');
+      } else if (idx === 4) {
+        document.getElementById('screenOwner').classList.add('active-screen-3d');
+        document.querySelectorAll('.nav-tab-3d')[3].classList.add('active-tab-3d');
+      } else if (idx === 'mining') {
+        document.getElementById('screenMining').classList.add('active-screen-3d');
+      } else if (idx === 'rewards') {
+        document.getElementById('screenRewards').classList.add('active-screen-3d');
       }
     }
 
@@ -813,18 +867,18 @@
     function verifyOwnerPin() {
       closeOwnerModal();
       showToast("👑 OWNER CONTROLS UNLOCKED");
-      document.getElementById('userSubtext').innerText = "👑 Owner Superuser";
+      document.getElementById('userRoleSub').innerText = "👑 Owner Superuser";
     }
 
     function executeTradeOrder(side) {
-      const amt = parseFloat(document.getElementById('tradeAmountInput').value) || 100;
+      const amt = parseFloat(document.getElementById('tradeAmtInput').value) || 100;
       vctBal += amt;
       document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
       showToast(`Trade Executed: BUY ${amt} VCT @ $0.2458`);
     }
 
     function initTradeChart() {
-      const el = document.getElementById('tradeCanvasChart');
+      const el = document.getElementById('tradeChartCanvas');
       if (!el || el.chartInstance) return;
       el.chartInstance = new Chart(el, {
         type: 'line',
@@ -847,6 +901,63 @@
         }
       });
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('bg3dCanvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 10;
+
+      const particleCount = 120;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      for(let i=0; i<particleCount*3; i++) {
+        positions[i] = (Math.random() - 0.5) * 20;
+      }
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const material = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.08, transparent: true, opacity: 0.6 });
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.0015;
+        particles.rotation.x += 0.0005;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      const container3d = document.getElementById('coin3dContainer');
+      if (container3d) {
+        const coinRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        coinRenderer.setSize(68, 68);
+        container3d.appendChild(coinRenderer.domElement);
+
+        const coinScene = new THREE.Scene();
+        const coinCamera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+        coinCamera.position.z = 3;
+
+        const light = new THREE.PointLight(0xFFD700, 2, 10);
+        light.position.set(2, 2, 4);
+        coinScene.add(light);
+
+        const coinGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.2, 32);
+        const coinMat = new THREE.MeshStandardMaterial({ color: 0xFFD700, metalness: 0.9, roughness: 0.1 });
+        const coinMesh = new THREE.Mesh(coinGeo, coinMat);
+        coinMesh.rotation.x = Math.PI / 4;
+        coinScene.add(coinMesh);
+
+        function animateCoin() {
+          requestAnimationFrame(animateCoin);
+          coinMesh.rotation.y += 0.02;
+          coinRenderer.render(coinScene, coinCamera);
+        }
+        animateCoin();
+      }
+    });
   </script>
 </body>
 </html>
