@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VictorCoin (VCT) - 2026 Next-Gen 3D Institutional Crypto Platform</title>
+  <title>VictorCoin (VCT) - 2026 Next-Gen 3D Live Crypto Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,592 +28,92 @@
       --shadow-3d: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.2);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-space); color: var(--text-bright); display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
 
-    body {
-      background-color: var(--bg-space);
-      color: var(--text-bright);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* 3D Particle Canvas Backdrop */
-    #bg3dCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
+    #bg3dCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 
     .app-frame-3d {
-      width: 100%;
-      max-width: 440px;
-      background-color: rgba(9, 10, 12, 0.92);
-      backdrop-filter: blur(20px);
-      min-height: 100vh;
-      position: relative;
-      z-index: 10;
-      padding-bottom: 95px;
-      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95);
-      display: flex;
-      flex-direction: column;
+      width: 100%; max-width: 440px; background-color: rgba(9, 10, 12, 0.92); backdrop-filter: blur(20px);
+      min-height: 100vh; position: relative; z-index: 10; padding-bottom: 95px; box-shadow: 0 0 70px rgba(0,0,0,0.95);
+      display: flex; flex-direction: column;
     }
 
-    /* 3D Brand Header */
-    .brand-header-3d {
-      text-align: center;
-      padding: 18px 0 10px 0;
-      background: rgba(4, 5, 7, 0.9);
-      border-bottom: 1px solid var(--border-subtle);
-      position: relative;
-    }
+    .brand-header-3d { text-align: center; padding: 18px 0 10px 0; background: rgba(4, 5, 7, 0.9); border-bottom: 1px solid var(--border-subtle); }
+    .brand-title-3d { font-size: 22px; font-weight: 900; letter-spacing: 2px; background: var(--gold-gradient-3d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .brand-subtitle-3d { font-size: 9px; color: var(--text-muted); letter-spacing: 2.5px; text-transform: uppercase; margin-top: 2px; }
 
-    .brand-title-3d {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      background: var(--gold-gradient-3d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    }
+    .app-header-3d { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: rgba(9, 10, 12, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+    .user-profile-3d { display: flex; align-items: center; gap: 12px; }
+    .avatar-3d { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--gold-24k); background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb'); background-size: cover; background-position: center; }
+    .user-text-3d h5 { font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+    .user-text-3d p { font-size: 11px; color: var(--text-muted); }
+    .header-controls-3d { display: flex; align-items: center; gap: 10px; }
+    .icon-btn-3d { background: var(--card-surface); border: 1px solid var(--border-3d-gold); color: var(--gold-24k); width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
 
-    .brand-subtitle-3d {
-      font-size: 9px;
-      color: var(--text-muted);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
+    .card-3d { background: var(--card-gradient-3d); border: 1px solid var(--border-3d-gold); border-radius: 24px; padding: 22px; margin: 12px 18px 16px 18px; box-shadow: var(--shadow-3d); position: relative; overflow: hidden; }
+    .card-top-row { display: flex; justify-content: space-between; align-items: center; }
+    .card-title-label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+    .badge-gain-3d { background: rgba(0, 230, 118, 0.15); color: var(--green-glow); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 800; }
 
-    /* App Header Bar */
-    .app-header-3d {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      background: rgba(9, 10, 12, 0.85);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    .balance-text-3d { font-size: 32px; font-weight: 900; margin: 8px 0 2px 0; display: flex; align-items: baseline; gap: 6px; }
+    .symbol-24k { font-size: 18px; color: var(--gold-24k); font-weight: 900; }
+    .fiat-text-3d { font-size: 13px; color: var(--text-muted); }
 
-    .user-profile-3d {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .actions-grid-3d { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+    .btn-pill-3d { background: var(--card-surface); border: 1px solid var(--border-3d-gold); border-radius: 14px; padding: 10px 0; color: var(--text-bright); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+    .btn-pill-3d span { color: var(--gold-24k); font-weight: 900; }
 
-    .avatar-3d {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid var(--gold-24k);
-      background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb');
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-    }
+    .grid-four-3d { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 0 18px 16px 18px; }
+    .tile-3d { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+    .icon-box-3d { width: 58px; height: 58px; background: var(--card-gradient-3d); border: 1px solid var(--border-3d-gold); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--gold-24k); font-size: 24px; }
+    .tile-3d label { font-size: 11px; color: var(--text-bright); font-weight: 600; }
 
-    .user-text-3d h5 {
-      font-size: 14px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .staking-banner-3d { background: var(--card-gradient-3d); border: 1.5px solid var(--gold-24k); border-radius: 24px; padding: 20px; margin: 0 18px 16px 18px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-3d); }
+    .staking-info-3d h4 { font-size: 18px; font-weight: 900; }
+    .staking-info-3d p { color: var(--gold-24k); font-size: 14px; font-weight: 800; margin: 3px 0 12px 0; }
+    .staking-info-3d a { color: var(--text-bright); font-size: 13px; font-weight: 700; text-decoration: none; }
+    .coin-emblem-3d-wrapper { width: 68px; height: 68px; }
 
-    .verified-blue {
-      color: #3b82f6;
-      font-size: 13px;
-    }
+    .market-header-3d { display: flex; justify-content: space-between; align-items: center; padding: 0 18px 12px 18px; }
+    .title-3d { font-size: 17px; font-weight: 800; }
+    .link-3d { font-size: 12px; color: var(--gold-24k); font-weight: 700; cursor: pointer; }
 
-    .user-text-3d p {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .header-controls-3d {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-btn-3d {
-      background: var(--card-surface);
-      border: 1px solid var(--border-3d-gold);
-      color: var(--gold-24k);
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .icon-btn-3d:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
-    }
-
-    /* 3D Glass Cards */
-    .card-3d {
-      background: var(--card-gradient-3d);
-      border: 1px solid var(--border-3d-gold);
-      border-radius: 24px;
-      padding: 22px;
-      margin: 12px 18px 16px 18px;
-      box-shadow: var(--shadow-3d);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card-3d:hover {
-      transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.35);
-    }
-
-    .card-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card-title-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-gain-3d {
-      background: rgba(0, 230, 118, 0.15);
-      color: var(--green-glow);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 800;
-      border: 1px solid rgba(0, 230, 118, 0.3);
-      box-shadow: 0 0 12px rgba(0, 230, 118, 0.2);
-    }
-
-    .balance-text-3d {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      margin: 8px 0 2px 0;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .symbol-24k {
-      font-size: 18px;
-      color: var(--gold-24k);
-      font-weight: 900;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    }
-
-    .fiat-text-3d {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .actions-grid-3d {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .btn-pill-3d {
-      background: var(--card-surface);
-      border: 1px solid var(--border-3d-gold);
-      border-radius: 14px;
-      padding: 10px 0;
-      color: var(--text-bright);
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .btn-pill-3d:hover {
-      background: rgba(255, 215, 0, 0.15);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(255, 215, 0, 0.25);
-    }
-
-    .btn-pill-3d span {
-      color: var(--gold-24k);
-      font-weight: 900;
-    }
-
-    /* 4 Feature Grid */
-    .grid-four-3d {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      padding: 0 18px 16px 18px;
-    }
-
-    .tile-3d {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .tile-3d:hover {
-      transform: translateY(-4px);
-    }
-
-    .icon-box-3d {
-      width: 58px;
-      height: 58px;
-      background: var(--card-gradient-3d);
-      border: 1px solid var(--border-3d-gold);
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-24k);
-      font-size: 24px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .tile-3d label {
-      font-size: 11px;
-      color: var(--text-bright);
-      font-weight: 600;
-    }
-
-    /* 3D Staking Banner */
-    .staking-banner-3d {
-      background: var(--card-gradient-3d);
-      border: 1.5px solid var(--gold-24k);
-      border-radius: 24px;
-      padding: 20px;
-      margin: 0 18px 16px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow-3d);
-    }
-
-    .staking-info-3d h4 {
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .staking-info-3d p {
-      color: var(--gold-24k);
-      font-size: 14px;
-      font-weight: 800;
-      margin: 3px 0 12px 0;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-
-    .staking-info-3d a {
-      color: var(--text-bright);
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .coin-emblem-3d-wrapper {
-      width: 68px;
-      height: 68px;
-      position: relative;
-    }
-
-    /* Market Overview List */
-    .market-header-3d {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 18px 12px 18px;
-    }
-
-    .title-3d {
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .link-3d {
-      font-size: 12px;
-      color: var(--gold-24k);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .market-list-3d {
-      padding: 0 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .coin-card-3d {
-      background: var(--card-gradient-3d);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .coin-card-3d:hover {
-      border-color: var(--border-3d-gold);
-      transform: translateX(3px);
-    }
-
-    .coin-left-3d {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .coin-badge-3d {
-      width: 40px;
-      height: 40px;
-      background: var(--card-surface);
-      border: 1px solid var(--border-3d-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      color: var(--gold-24k);
-      font-size: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .coin-info-3d h6 {
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .coin-info-3d p {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .coin-right-3d {
-      text-align: right;
-    }
-
-    .coin-price-3d {
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .coin-change-3d {
-      font-size: 12px;
-      font-weight: 800;
-    }
-
+    .market-list-3d { padding: 0 18px; display: flex; flex-direction: column; gap: 10px; }
+    .coin-card-3d { background: var(--card-gradient-3d); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+    .coin-left-3d { display: flex; align-items: center; gap: 14px; }
+    .coin-badge-3d { width: 40px; height: 40px; background: var(--card-surface); border: 1px solid var(--border-3d-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--gold-24k); font-size: 16px; }
+    .coin-info-3d h6 { font-size: 14px; font-weight: 800; }
+    .coin-info-3d p { font-size: 11px; color: var(--text-muted); }
+    .coin-right-3d { text-align: right; }
+    .coin-price-3d { font-size: 14px; font-weight: 800; }
+    .coin-change-3d { font-size: 12px; font-weight: 800; }
     .green-val { color: var(--green-glow); }
 
-    /* Trust Ribbon */
-    .trust-ribbon-3d {
-      margin: 18px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-around;
-    }
+    .trust-ribbon-3d { margin: 18px; background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 14px; display: flex; justify-content: space-around; }
+    .trust-item-3d { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text-muted); font-weight: 600; }
+    .trust-item-3d span { color: var(--gold-24k); font-size: 14px; }
 
-    .trust-item-3d {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .trust-item-3d span {
-      color: var(--gold-24k);
-      font-size: 14px;
-    }
-
-    /* Fixed Bottom Nav */
-    .bottom-nav-3d {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 440px;
-      height: 75px;
-      background: rgba(14, 16, 21, 0.96);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border-subtle);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 200;
-    }
-
-    .nav-tab-3d {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-muted);
-      font-size: 10px;
-      cursor: pointer;
-      flex: 1;
-    }
-
-    .nav-tab-3d.active-tab-3d {
-      color: var(--gold-24k);
-      font-weight: 800;
-    }
-
-    .center-v-btn-3d {
-      width: 54px;
-      height: 54px;
-      background: var(--gold-gradient-3d);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 900;
-      color: #000;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-      transform: translateY(-10px);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .center-v-btn-3d:hover {
-      transform: translateY(-14px) scale(1.08);
-    }
+    .bottom-nav-3d { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 440px; height: 75px; background: rgba(14, 16, 21, 0.96); backdrop-filter: blur(20px); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-around; align-items: center; z-index: 200; }
+    .nav-tab-3d { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 10px; cursor: pointer; flex: 1; }
+    .nav-tab-3d.active-tab-3d { color: var(--gold-24k); font-weight: 800; }
+    .center-v-btn-3d { width: 54px; height: 54px; background: var(--gold-gradient-3d); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; color: #000; cursor: pointer; transform: translateY(-10px); }
 
     .screen-container-3d { display: none; }
     .screen-container-3d.active-screen-3d { display: block; }
 
-    .gold-btn-3d {
-      width: 100%;
-      padding: 14px;
-      background: var(--gold-gradient-3d);
-      color: #000;
-      font-weight: 900;
-      font-size: 14px;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
-      transition: transform 0.2s;
-    }
-
-    .gold-btn-3d:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Modal Backdrop */
-    .modal-overlay-3d {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(12px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-dialog-3d {
-      background: var(--card-bg);
-      border: 1.5px solid var(--gold-24k);
-      border-radius: 26px;
-      padding: 26px;
-      width: 100%;
-      max-width: 350px;
-      text-align: center;
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
-    }
-
-    .pin-input-3d {
-      width: 100%;
-      padding: 14px;
-      font-size: 24px;
-      letter-spacing: 10px;
-      text-align: center;
-      background: var(--bg-space);
-      border: 1px solid var(--border-3d-gold);
-      border-radius: 12px;
-      color: var(--gold-24k);
-      margin: 16px 0;
-      outline: none;
-    }
-
-    .toast-banner-3d {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--gold-24k);
-      color: #000;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 13px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      display: none;
-    }
+    .gold-btn-3d { width: 100%; padding: 14px; background: var(--gold-gradient-3d); color: #000; font-weight: 900; font-size: 14px; border: none; border-radius: 14px; cursor: pointer; }
+    .modal-overlay-3d { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(12px); z-index: 999; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-dialog-3d { background: var(--card-bg); border: 1.5px solid var(--gold-24k); border-radius: 26px; padding: 26px; width: 100%; max-width: 350px; text-align: center; }
+    .pin-input-3d { width: 100%; padding: 14px; font-size: 24px; letter-spacing: 10px; text-align: center; background: var(--bg-space); border: 1px solid var(--border-3d-gold); border-radius: 12px; color: var(--gold-24k); margin: 16px 0; outline: none; }
+    .toast-banner-3d { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--gold-24k); color: #000; padding: 12px 24px; border-radius: 30px; font-weight: 800; font-size: 13px; z-index: 1000; display: none; }
   </style>
 </head>
 <body>
 
-  <!-- WebGL 3D Particle Backdrop -->
   <canvas id="bg3dCanvas"></canvas>
-
   <div id="toast" class="toast-banner-3d"></div>
 
-  <!-- Owner PIN Login Modal -->
   <div id="ownerPinModal" class="modal-overlay-3d">
     <div class="modal-dialog-3d">
       <div style="font-size: 34px; margin-bottom: 6px;">👑</div>
@@ -627,18 +127,16 @@
 
   <div class="app-frame-3d">
 
-    <!-- 3D Brand Banner -->
     <div class="brand-header-3d">
       <div class="brand-title-3d">VICTORCOIN</div>
       <div class="brand-subtitle-3d">THE FUTURE OF DIGITAL MONEY</div>
     </div>
 
-    <!-- App Header Bar -->
     <header class="app-header-3d">
       <div class="user-profile-3d">
         <div class="avatar-3d"></div>
         <div class="user-text-3d">
-          <h5>Hello, Victor <span class="verified-blue">✓</span></h5>
+          <h5>Hello, Victor <span style="color:#3b82f6;">✓</span></h5>
           <p id="userRoleSub">Welcome Back!</p>
         </div>
       </div>
@@ -649,20 +147,17 @@
       </div>
     </header>
 
-    <!-- SCREEN 0: HOME SCREEN -->
     <div id="screenHome" class="screen-container-3d active-screen-3d">
-      
-      <!-- Total Balance Card -->
       <div class="card-3d">
         <div class="card-top-row">
           <span class="card-title-label">Total Balance</span>
-          <span class="badge-gain-3d">▲ 12.5% (24h)</span>
+          <span class="badge-gain-3d">▲ <span id="vctGainPerc">12.5%</span> (24h)</span>
         </div>
         <div class="balance-text-3d">
           <span id="vctBalDisplay">12,458.75</span>
           <span class="symbol-24k">VCT</span>
         </div>
-        <div class="fiat-text-3d">≈ $8,742.58 USD</div>
+        <div class="fiat-text-3d" id="fiatValDisplay">≈ $8,742.58 USD</div>
 
         <div class="actions-grid-3d">
           <div class="btn-pill-3d" onclick="switchTab(3)"><span>↑</span> Send</div>
@@ -672,27 +167,13 @@
         </div>
       </div>
 
-      <!-- 4 Navigation Grid -->
       <div class="grid-four-3d">
-        <div class="tile-3d" onclick="switchTab(3)">
-          <div class="icon-box-3d">💳</div>
-          <label>Wallet</label>
-        </div>
-        <div class="tile-3d" onclick="switchTab(4)">
-          <div class="icon-box-3d">💰</div>
-          <label>Staking</label>
-        </div>
-        <div class="tile-3d" onclick="switchTab('rewards')">
-          <div class="icon-box-3d">🎁</div>
-          <label>Rewards</label>
-        </div>
-        <div class="tile-3d" onclick="switchTab('mining')">
-          <div class="icon-box-3d">⚡</div>
-          <label>Mining</label>
-        </div>
+        <div class="tile-3d" onclick="switchTab(3)"><div class="icon-box-3d">💳</div><label>Wallet</label></div>
+        <div class="tile-3d" onclick="switchTab(4)"><div class="icon-box-3d">💰</div><label>Staking</label></div>
+        <div class="tile-3d" onclick="switchTab('rewards')"><div class="icon-box-3d">🎁</div><label>Rewards</label></div>
+        <div class="tile-3d" onclick="switchTab('mining')"><div class="icon-box-3d">⚡</div><label>Mining</label></div>
       </div>
 
-      <!-- Staking Banner with 3D Emblem Container -->
       <div class="staking-banner-3d">
         <div class="staking-info-3d">
           <h4>Stake VCT</h4>
@@ -709,31 +190,13 @@
 
       <div class="market-list-3d">
         <div class="coin-card-3d" onclick="switchTab(2)">
-          <div class="coin-left-3d">
-            <div class="coin-badge-3d">V</div>
-            <div class="coin-info-3d">
-              <h6>VictorCoin</h6>
-              <p>VCT / USDT</p>
-            </div>
-          </div>
-          <div class="coin-right-3d">
-            <div class="coin-price-3d">$0.2458</div>
-            <div class="coin-change-3d green-val">▲ +8.32%</div>
-          </div>
+          <div class="coin-left-3d"><div class="coin-badge-3d">V</div><div class="coin-info-3d"><h6>VictorCoin</h6><p>VCT / USDT</p></div></div>
+          <div class="coin-right-3d"><div class="coin-price-3d" id="vctPriceLive">$0.2458</div><div class="coin-change-3d green-val">▲ +8.32%</div></div>
         </div>
 
         <div class="coin-card-3d" onclick="switchTab(2)">
-          <div class="coin-left-3d">
-            <div class="coin-badge-3d" style="color: #F7931A;">₿</div>
-            <div class="coin-info-3d">
-              <h6>Bitcoin</h6>
-              <p>BTC / USDT</p>
-            </div>
-          </div>
-          <div class="coin-right-3d">
-            <div class="coin-price-3d">$67,245.32</div>
-            <div class="coin-change-3d green-val">▲ +3.21%</div>
-          </div>
+          <div class="coin-left-3d"><div class="coin-badge-3d" style="color: #F7931A;">₿</div><div class="coin-info-3d"><h6>Bitcoin</h6><p>BTC / USDT</p></div></div>
+          <div class="coin-right-3d"><div class="coin-price-3d" id="btcPriceLive">$67,245.32</div><div class="coin-change-3d green-val">▲ +3.21%</div></div>
         </div>
       </div>
 
@@ -746,25 +209,24 @@
       </div>
     </div>
 
-    <!-- SCREEN 1: MARKET SCREEN -->
+    <!-- SCREEN 1: MARKET -->
     <div id="screenMarket" class="screen-container-3d">
       <div style="padding: 18px;">
         <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 14px;">Market</h3>
         <input type="text" placeholder="Q Search Coin" style="width: 100%; padding: 14px; background: var(--card-bg); border: 1px solid var(--border-3d-gold); border-radius: 14px; color: #fff; margin-bottom: 16px; outline: none;">
         <div class="market-list-3d" style="padding: 0;">
-          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d">V</div><div><h6>VictorCoin</h6><p>VCT</p></div></div><div class="coin-right-3d"><div>$0.2458</div><div class="green-val">+8.32%</div></div></div>
-          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d" style="color: #F7931A;">₿</div><div><h6>Bitcoin</h6><p>BTC</p></div></div><div class="coin-right-3d"><div>$67,245.32</div><div class="green-val">+3.21%</div></div></div>
-          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d" style="color: #627EEA;">Ξ</div><div><h6>Ethereum</h6><p>ETH</p></div></div><div class="coin-right-3d"><div>$3,245.67</div><div class="green-val">+2.45%</div></div></div>
+          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d">V</div><div><h6>VictorCoin</h6><p>VCT</p></div></div><div class="coin-right-3d"><div id="vctPriceLive2">$0.2458</div><div class="green-val">+8.32%</div></div></div>
+          <div class="coin-card-3d" onclick="switchTab(2)"><div class="coin-left-3d"><div class="coin-badge-3d" style="color: #F7931A;">₿</div><div><h6>Bitcoin</h6><p>BTC</p></div></div><div class="coin-right-3d"><div id="btcPriceLive2">$67,245.32</div><div class="green-val">+3.21%</div></div></div>
         </div>
       </div>
     </div>
 
-    <!-- SCREEN 2: TRADE SCREEN -->
+    <!-- SCREEN 2: TRADE -->
     <div id="screenTrade" class="screen-container-3d">
       <div style="padding: 18px;">
         <h3 style="font-size: 22px; font-weight: 900;">Trade</h3>
         <p style="color: var(--gold-24k); font-size: 14px; font-weight: 800; margin-top: 2px;">VCT / USDT</p>
-        <p style="color: var(--green-glow); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;">0.2458 ▲ +8.32%</p>
+        <p style="color: var(--green-glow); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;" id="vctPriceTrade">$0.2458 ▲ +8.32%</p>
         
         <div class="card-3d" style="margin: 0 0 16px 0; height: 190px; padding: 10px;">
           <canvas id="tradeChartCanvas"></canvas>
@@ -778,7 +240,7 @@
       </div>
     </div>
 
-    <!-- SCREEN 3: WALLET SCREEN -->
+    <!-- SCREEN 3: WALLET -->
     <div id="screenWallet" class="screen-container-3d">
       <div style="padding: 18px;">
         <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 14px;">Wallet</h3>
@@ -821,37 +283,25 @@
           <p style="color: var(--gold-24k); font-weight: 900; font-size: 12px;">VictorCoin Hub</p>
           <h2 style="font-size: 26px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
           <h1 style="font-size: 44px; font-weight: 900; color: var(--gold-24k); margin: 6px 0;">$5,000</h1>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Special offer for new registered users</p>
           <button class="gold-btn-3d" onclick="showToast('Welcome Bonus Claimed!')">Claim Welcome Bonus</button>
         </div>
       </div>
     </div>
 
-    <!-- Fixed Bottom Nav -->
     <nav class="bottom-nav-3d">
-      <div class="nav-tab-3d active-tab-3d" onclick="switchTab(0)">
-        <span style="font-size: 20px;">🏠</span>
-        <span>Home</span>
-      </div>
-      <div class="nav-tab-3d" onclick="switchTab(1)">
-        <span style="font-size: 20px;">📊</span>
-        <span>Market</span>
-      </div>
+      <div class="nav-tab-3d active-tab-3d" onclick="switchTab(0)"><span>🏠</span><span>Home</span></div>
+      <div class="nav-tab-3d" onclick="switchTab(1)"><span>📊</span><span>Market</span></div>
       <div class="center-v-btn-3d" onclick="switchTab(2)" title="Trade">V</div>
-      <div class="nav-tab-3d" onclick="switchTab(2)">
-        <span style="font-size: 20px;">⇄</span>
-        <span>Trade</span>
-      </div>
-      <div class="nav-tab-3d" onclick="switchTab(4)">
-        <span style="font-size: 20px;">👤</span>
-        <span>Profile</span>
-      </div>
+      <div class="nav-tab-3d" onclick="switchTab(2)"><span>⇄</span><span>Trade</span></div>
+      <div class="nav-tab-3d" onclick="switchTab(4)"><span>👤</span><span>Profile</span></div>
     </nav>
 
   </div>
 
   <script>
     let vctBal = 12458.75;
+    let vctPrice = 0.2458;
+    let btcPrice = 67245.32;
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -899,8 +349,24 @@
       const amt = parseFloat(document.getElementById('tradeAmtInput').value) || 100;
       vctBal += amt;
       document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
-      showToast(`Trade Executed: BUY ${amt} VCT @ $0.2458`);
+      showToast(`Trade Executed: BUY ${amt} VCT @ $${vctPrice.toFixed(4)}`);
     }
+
+    // Live Auto-Tick Price Growth Engine
+    setInterval(() => {
+      const delta = (Math.random() - 0.48) * 0.0015;
+      vctPrice = Math.max(0.20, vctPrice + delta);
+      btcPrice += (Math.random() - 0.48) * 12.5;
+
+      document.getElementById('vctPriceLive').innerText = `$${vctPrice.toFixed(4)}`;
+      document.getElementById('vctPriceLive2').innerText = `$${vctPrice.toFixed(4)}`;
+      document.getElementById('vctPriceTrade').innerText = `$${vctPrice.toFixed(4)} ▲ +8.32%`;
+      document.getElementById('btcPriceLive').innerText = `$${btcPrice.toFixed(2)}`;
+      document.getElementById('btcPriceLive2').innerText = `$${btcPrice.toFixed(2)}`;
+
+      const fiatEquiv = vctBal * vctPrice * 2.85;
+      document.getElementById('fiatValDisplay').innerText = `≈ $${fiatEquiv.toFixed(2)} USD`;
+    }, 2500);
 
     function initTradeChart() {
       const el = document.getElementById('tradeChartCanvas');
@@ -919,15 +385,13 @@
           }]
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
+          responsive: true, maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: { x: { display: false }, y: { display: false } }
         }
       });
     }
 
-    /* 3D WebGL Gold Particle & 3D Coin Mesh Initializer */
     window.addEventListener('DOMContentLoaded', () => {
       const canvas = document.getElementById('bg3dCanvas');
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -937,19 +401,15 @@
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.z = 10;
 
-      // 3D Particles
       const particleCount = 120;
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
-      for(let i=0; i<particleCount*3; i++) {
-        positions[i] = (Math.random() - 0.5) * 20;
-      }
+      for(let i=0; i<particleCount*3; i++) { positions[i] = (Math.random() - 0.5) * 20; }
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       const material = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.08, transparent: true, opacity: 0.6 });
       const particles = new THREE.Points(geometry, material);
       scene.add(particles);
 
-      // Render Loop
       function animate() {
         requestAnimationFrame(animate);
         particles.rotation.y += 0.0015;
@@ -958,7 +418,6 @@
       }
       animate();
 
-      // 3D Emblem Mesh for Banner
       const container3d = document.getElementById('coin3dContainer');
       if (container3d) {
         const coinRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
