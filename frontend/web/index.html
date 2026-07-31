@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VictorCoin (VCT) - Multi-Theme Crypto Exchange & Mining Engine</title>
+  <title>VictorCoin (VCT) - Enterprise Crypto Platform & CRM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -25,54 +25,6 @@
       --accent-gradient: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #996515 100%);
     }
 
-    :root[data-theme="emerald"] {
-      --bg-main: #040D09;
-      --surface-card: #0A1812;
-      --surface-light: #12241C;
-      --primary-accent: #00E676;
-      --accent-glow: rgba(0, 230, 118, 0.25);
-      --green-positive: #00E676;
-      --red-negative: #FF5252;
-      --text-main: #FFFFFF;
-      --text-muted: #80A393;
-      --border-accent: rgba(0, 230, 118, 0.25);
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --card-gradient: linear-gradient(145deg, #0F2219 0%, #07140D 100%);
-      --accent-gradient: linear-gradient(135deg, #69F0AE 0%, #00E676 50%, #00B0FF 100%);
-    }
-
-    :root[data-theme="cyberpunk"] {
-      --bg-main: #0B0514;
-      --surface-card: #150B24;
-      --surface-light: #221238;
-      --primary-accent: #00E5FF;
-      --accent-glow: rgba(0, 229, 255, 0.3);
-      --green-positive: #00E676;
-      --red-negative: #FF0055;
-      --text-main: #FFFFFF;
-      --text-muted: #A08DB5;
-      --border-accent: rgba(0, 229, 255, 0.3);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --card-gradient: linear-gradient(145deg, #1F0F35 0%, #0F071C 100%);
-      --accent-gradient: linear-gradient(135deg, #00E5FF 0%, #7C4DFF 50%, #FF007F 100%);
-    }
-
-    :root[data-theme="silver"] {
-      --bg-main: #0B0C0E;
-      --surface-card: #14161B;
-      --surface-light: #1E222A;
-      --primary-accent: #E0E6ED;
-      --accent-glow: rgba(224, 230, 237, 0.2);
-      --green-positive: #00E676;
-      --red-negative: #FF5252;
-      --text-main: #FFFFFF;
-      --text-muted: #8B94A0;
-      --border-accent: rgba(224, 230, 237, 0.25);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --card-gradient: linear-gradient(145deg, #1C2028 0%, #101217 100%);
-      --accent-gradient: linear-gradient(135deg, #FFFFFF 0%, #B0B9C6 50%, #687280 100%);
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -88,7 +40,6 @@
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background-color 0.3s ease;
     }
 
     .app-shell {
@@ -164,37 +115,11 @@
       justify-content: center;
       cursor: pointer;
       font-size: 16px;
-      transition: all 0.2s;
     }
 
     .ctrl-icon-btn.highlight {
       color: var(--primary-accent);
       border-color: var(--border-accent);
-    }
-
-    .theme-bar {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 18px;
-      background: var(--surface-card);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .theme-chip {
-      padding: 5px 12px;
-      border-radius: 14px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      transition: all 0.2s;
-    }
-
-    .theme-chip.active {
-      border-color: var(--primary-accent);
-      color: var(--primary-accent);
-      background: rgba(255, 255, 255, 0.05);
     }
 
     .glass-card {
@@ -204,61 +129,6 @@
       padding: 20px;
       margin: 16px 18px 0 18px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .balance-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .balance-val {
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .balance-symbol {
-      font-size: 18px;
-      color: var(--primary-accent);
-      font-weight: 800;
-    }
-
-    .balance-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .actions-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .action-button {
-      background: var(--surface-light);
-      border: 1px solid var(--border-accent);
-      border-radius: 12px;
-      padding: 10px 0;
-      color: var(--text-main);
-      font-size: 12px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .action-button:hover {
-      transform: translateY(-2px);
     }
 
     .feature-grid {
@@ -293,26 +163,6 @@
       font-size: 12px;
       color: var(--text-main);
       font-weight: 500;
-      cursor: pointer;
-    }
-
-    .orderbook-card {
-      margin: 16px 18px 0 18px;
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .orderbook-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      padding: 4px 0;
-    }
-
-    .market-list-section {
-      padding: 16px 18px;
     }
 
     .coin-item-card {
@@ -325,30 +175,6 @@
       justify-content: space-between;
       margin-bottom: 10px;
       cursor: pointer;
-    }
-
-    .coin-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .coin-badge {
-      width: 40px;
-      height: 40px;
-      background: var(--surface-light);
-      border: 1px solid var(--border-accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: var(--primary-accent);
-      font-size: 16px;
-    }
-
-    .coin-right {
-      text-align: right;
     }
 
     .bottom-nav {
@@ -415,31 +241,6 @@
       cursor: pointer;
     }
 
-    .modal-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-box {
-      background: var(--surface-card);
-      border: 1px solid var(--border-accent);
-      border-radius: 24px;
-      padding: 24px;
-      width: 100%;
-      max-width: 360px;
-      text-align: center;
-    }
-
     .toast-popup {
       position: fixed;
       top: 20px;
@@ -455,33 +256,19 @@
       z-index: 1000;
       display: none;
     }
+
+    .crm-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+    }
   </style>
 </head>
 <body data-theme="gold">
 
   <div id="toast" class="toast-popup"></div>
-
-  <div id="balanceConfigModal" class="modal-bg">
-    <div class="modal-box">
-      <h3>⚙️ Balance Customizer</h3>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Set initial balances for testing</p>
-      <input type="number" id="vctInput" placeholder="VCT Balance" value="12458.75" style="width: 100%; padding: 12px; margin: 12px 0; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff;">
-      <input type="number" id="usdtInput" placeholder="USDT Balance" value="100.25" style="width: 100%; padding: 12px; margin-bottom: 14px; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff;">
-      <button class="gold-btn" onclick="saveCustomBalances()">SAVE BALANCES</button>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; cursor: pointer;" onclick="closeConfigModal()">Close</p>
-    </div>
-  </div>
-
-  <div id="ownerPinModal" class="modal-bg">
-    <div class="modal-box">
-      <div style="font-size: 32px; margin-bottom: 6px;">👑</div>
-      <h3>Owner Security Login</h3>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Enter PIN for owner controls</p>
-      <input type="password" id="pinCodeInput" placeholder="••••••" maxlength="6" style="width: 100%; padding: 14px; font-size: 24px; letter-spacing: 8px; text-align: center; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: var(--primary-accent); margin: 14px 0; outline: none;">
-      <button class="gold-btn" onclick="verifyOwnerPin()">UNLOCK OWNER CONTROLS</button>
-      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; cursor: pointer;" onclick="closeOwnerModal()">Cancel</p>
-    </div>
-  </div>
 
   <div class="app-shell">
 
@@ -494,35 +281,28 @@
         </div>
       </div>
       <div class="header-controls">
-        <button class="ctrl-icon-btn highlight" onclick="openConfigModal()" title="Customize Balances">⚙️</button>
-        <button class="ctrl-icon-btn highlight" onclick="openOwnerModal()" title="Owner Login PIN">👑</button>
+        <button class="ctrl-icon-btn highlight" onclick="switchTab('crm')" title="Enterprise CRM Suite">👥</button>
+        <button class="ctrl-icon-btn highlight" onclick="showToast('Owner Governance Active')" title="Owner Mode">👑</button>
         <button class="ctrl-icon-btn" onclick="showToast('Notifications: Staking rewards +145.85 VCT credited')">🔔</button>
       </div>
     </header>
 
-    <div class="theme-bar">
-      <div class="theme-chip active" onclick="setAppTheme('gold')">Gold</div>
-      <div class="theme-chip" onclick="setAppTheme('emerald')">Emerald</div>
-      <div class="theme-chip" onclick="setAppTheme('cyberpunk')">Cyberpunk</div>
-      <div class="theme-chip" onclick="setAppTheme('silver')">Silver</div>
-    </div>
-
     <div id="screenHome" class="screen-view active">
       <div class="glass-card">
-        <div class="balance-header">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Total Balance</span>
           <span style="background: rgba(0, 230, 118, 0.15); color: var(--green-positive); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700;">▲ 12.5% (24h)</span>
         </div>
-        <div class="balance-val">
+        <div style="font-size: 34px; font-weight: 800; display: flex; align-items: baseline; gap: 8px;">
           <span id="vctBalDisplay">12,458.75</span>
-          <span class="balance-symbol">VCT</span>
+          <span style="font-size: 18px; color: var(--primary-accent); font-weight: 800;">VCT</span>
         </div>
-        <div class="balance-sub" id="fiatBalDisplay">≈ $8,742.58 USD</div>
-        <div class="actions-grid">
-          <div class="action-button" onclick="switchTab(3)"><span style="color: var(--primary-accent);">↑</span> Send</div>
-          <div class="action-button" onclick="switchTab(3)"><span style="color: var(--primary-accent);">↓</span> Receive</div>
-          <div class="action-button" onclick="switchTab(2)"><span style="color: var(--primary-accent);">+</span> Buy</div>
-          <div class="action-button" onclick="switchTab(2)"><span style="color: var(--primary-accent);">⇄</span> Swap</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">≈ $8,742.58 USD</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px;">
+          <div class="action-btn" style="background: var(--surface-light); padding: 10px 0; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="switchTab(3)">↑ Send</div>
+          <div class="action-btn" style="background: var(--surface-light); padding: 10px 0; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="switchTab(3)">↓ Receive</div>
+          <div class="action-btn" style="background: var(--surface-light); padding: 10px 0; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="switchTab(2)">+ Buy</div>
+          <div class="action-btn" style="background: var(--surface-light); padding: 10px 0; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="switchTab(2)">⇄ Swap</div>
         </div>
       </div>
 
@@ -535,9 +315,9 @@
           <div class="tile-icon">💎</div>
           <label>Staking</label>
         </div>
-        <div class="tile-box" onclick="switchTab('rewards')">
-          <div class="tile-icon">🎁</div>
-          <label>Rewards</label>
+        <div class="tile-box" onclick="switchTab('crm')">
+          <div class="tile-icon">👥</div>
+          <label>CRM Suite</label>
         </div>
         <div class="tile-box" onclick="switchTab(3)">
           <div class="tile-icon">💳</div>
@@ -545,37 +325,51 @@
         </div>
       </div>
 
-      <div class="market-list-section">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <h3 style="font-size: 17px; font-weight: 800;">Markets Overview</h3>
-          <span style="font-size: 13px; color: var(--primary-accent); cursor: pointer;" onclick="switchTab(1)">View All</span>
-        </div>
-
+      <div style="padding: 16px 18px;">
+        <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 12px;">Markets Overview</h3>
         <div class="coin-item-card" onclick="switchTab(2)">
-          <div class="coin-left">
-            <div class="coin-badge">V</div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; background: var(--surface-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary-accent);">V</div>
             <div>
               <h5 style="font-size: 14px;">VictorCoin</h5>
               <p style="font-size: 12px; color: var(--text-muted);">VCT / USDT</p>
             </div>
           </div>
-          <div class="coin-right">
+          <div style="text-align: right;">
             <div style="font-weight: 700; font-size: 14px;">$0.2458</div>
             <div style="font-size: 12px; color: var(--green-positive); font-weight: 700;">▲ +8.32%</div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="coin-item-card" onclick="switchTab(2)">
-          <div class="coin-left">
-            <div class="coin-badge" style="color: #F7931A;">₿</div>
-            <div>
-              <h5 style="font-size: 14px;">Bitcoin</h5>
-              <p style="font-size: 12px; color: var(--text-muted);">BTC / USDT</p>
-            </div>
+    <div id="screenCRM" class="screen-view">
+      <div style="padding: 18px;">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">👥 Enterprise CRM Suite</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Customer Relationship Management & Ticket Escalation</p>
+        
+        <div class="glass-card" style="margin: 0 0 16px 0;">
+          <h4 style="color: var(--primary-accent); margin-bottom: 8px;">CRM Overview & Metrics</h4>
+          <div class="crm-row"><span>Total Customers</span><strong>4,580 Active</strong></div>
+          <div class="crm-row"><span>KYC Tier 3 Verified</span><strong>3,200 (69.8%)</strong></div>
+          <div class="crm-row"><span>Open Tickets</span><strong>18 Open</strong></div>
+          <div class="crm-row"><span>Avg Response Time</span><strong>4.2 mins</strong></div>
+          <div class="crm-row"><span>Lead Conversion (24h)</span><strong>142 Converted</strong></div>
+        </div>
+
+        <div class="glass-card" style="margin: 0;">
+          <h4 style="margin-bottom: 12px;">Customer Profiles</h4>
+          <div class="crm-row">
+            <div><strong>VictorOwner</strong><br><span style="font-size: 11px; color: var(--text-muted);">owner@victorcoin.io</span></div>
+            <span style="color: var(--primary-accent); font-weight: 700;">OWNER</span>
           </div>
-          <div class="coin-right">
-            <div style="font-weight: 700; font-size: 14px;">$67,245.32</div>
-            <div style="font-size: 12px; color: var(--green-positive); font-weight: 700;">▲ +3.21%</div>
+          <div class="crm-row">
+            <div><strong>ExecutiveCEO</strong><br><span style="font-size: 11px; color: var(--text-muted);">ceo@victorcoin.io</span></div>
+            <span style="color: var(--green-positive); font-weight: 700;">CEO</span>
+          </div>
+          <div class="crm-row">
+            <div><strong>ManagerAlpha</strong><br><span style="font-size: 11px; color: var(--text-muted);">manager@victorcoin.io</span></div>
+            <span style="color: #3b82f6; font-weight: 700;">MANAGER</span>
           </div>
         </div>
       </div>
@@ -584,11 +378,7 @@
     <div id="screenMarket" class="screen-view">
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 14px;">Markets</h2>
-        <div class="market-list-section" style="padding: 0;">
-          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div><div class="coin-right"><div>$0.2458</div><div style="color: var(--green-positive);">+8.32%</div></div></div>
-          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge" style="color: #F7931A;">₿</div><div><h5>Bitcoin</h5><p>BTC</p></div></div><div class="coin-right"><div>$67,245.32</div><div style="color: var(--green-positive);">+3.21%</div></div></div>
-          <div class="coin-item-card" onclick="switchTab(2)"><div class="coin-left"><div class="coin-badge" style="color: #627EEA;">Ξ</div><div><h5>Ethereum</h5><p>ETH</p></div></div><div class="coin-right"><div>$3,245.67</div><div style="color: var(--green-positive);">+2.45%</div></div></div>
-        </div>
+        <div class="coin-item-card" onclick="switchTab(2)"><div style="display: flex; align-items: center; gap: 12px;"><div style="width: 40px; height: 40px; background: var(--surface-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary-accent);">V</div><div><h5>VictorCoin</h5><p>VCT</p></div></div><div style="text-align: right;"><div>$0.2458</div><div style="color: var(--green-positive);">+8.32%</div></div></div>
       </div>
     </div>
 
@@ -596,20 +386,10 @@
       <div style="padding: 18px;">
         <h2 style="font-size: 22px; font-weight: 800;">Trade VCT / USDT</h2>
         <p style="color: var(--green-positive); font-size: 18px; font-weight: 800; margin: 4px 0 14px 0;">$0.2458 ▲ +8.32%</p>
-        
         <div class="glass-card" style="margin: 0 0 16px 0; height: 180px; padding: 10px;">
           <canvas id="tradeChartCanvas"></canvas>
         </div>
-
-        <div class="orderbook-card">
-          <h4 style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Live Order Book Depth</h4>
-          <div class="orderbook-row" style="color: var(--green-positive);"><span>BUY 0.2458</span><span>12,500 VCT</span></div>
-          <div class="orderbook-row" style="color: var(--green-positive);"><span>BUY 0.2455</span><span>45,000 VCT</span></div>
-          <div class="orderbook-row" style="color: var(--red-negative);"><span>SELL 0.2460</span><span>8,200 VCT</span></div>
-          <div class="orderbook-row" style="color: var(--red-negative);"><span>SELL 0.2465</span><span>30,000 VCT</span></div>
-        </div>
-
-        <div class="glass-card" style="margin: 16px 0 0 0;">
+        <div class="glass-card" style="margin: 0;">
           <label style="font-size: 12px; color: var(--text-muted);">Amount (VCT)</label>
           <input type="number" id="tradeAmt" value="100" style="width: 100%; padding: 12px; background: var(--bg-main); border: 1px solid var(--border-accent); border-radius: 10px; color: #fff; margin: 6px 0 14px 0;">
           <button class="gold-btn" style="background: var(--green-positive);" onclick="executeTrade('buy')">BUY VCT NOW</button>
@@ -624,8 +404,6 @@
           <p style="font-size: 11px; color: var(--text-muted);">Deposit Address</p>
           <p style="color: var(--primary-accent); font-size: 13px; font-weight: 700; word-break: break-all; margin-top: 4px;">0x8f99a00b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f</p>
         </div>
-        <h4 style="margin-bottom: 10px;">Payment Gateways</h4>
-        <p style="font-size: 13px; color: var(--text-muted);">UPI • Razorpay • Paytm • PhonePe • Bank Transfer</p>
       </div>
     </div>
 
@@ -647,19 +425,7 @@
         <div class="glass-card" style="margin: 14px 0 0 0;">
           <p style="font-size: 12px; color: var(--text-muted);">Mining Speed</p>
           <h3 style="font-size: 28px; color: var(--primary-accent); font-weight: 800;">45.8 MH/s (Active)</h3>
-          <p style="font-size: 13px; color: var(--green-positive); margin-top: 4px;">Yield: ~24.7 VCT / day</p>
-          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Claimed Mined VCT rewards to wallet (5% owner tax applied)')">CLAIM MINED VCT</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="screenRewards" class="screen-view">
-      <div style="padding: 18px;">
-        <div class="glass-card" style="margin: 0; border-color: var(--primary-accent);">
-          <p style="color: var(--primary-accent); font-weight: 800;">VictorCoin Hub</p>
-          <h2 style="font-size: 26px; font-weight: 900; margin-top: 4px;">Welcome Reward</h2>
-          <h1 style="font-size: 42px; font-weight: 900; color: var(--primary-accent);">$5,000</h1>
-          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Welcome Bonus Claimed!')">CLAIM WELCOME BONUS</button>
+          <button class="gold-btn" style="margin-top: 14px;" onclick="showToast('Claimed Mined VCT rewards to wallet')">CLAIM MINED VCT</button>
         </div>
       </div>
     </div>
@@ -688,20 +454,12 @@
 
   <script>
     let vctBal = 12458.75;
-    let usdtBal = 100.25;
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.innerText = msg;
       toast.style.display = 'block';
       setTimeout(() => { toast.style.display = 'none'; }, 3000);
-    }
-
-    function setAppTheme(themeName) {
-      document.documentElement.setAttribute('data-theme', themeName);
-      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-      showToast(`Switched Theme to ${themeName.toUpperCase()}`);
     }
 
     function switchTab(idx) {
@@ -725,28 +483,9 @@
         document.querySelectorAll('.nav-tab')[3].classList.add('active');
       } else if (idx === 'mining') {
         document.getElementById('screenMining').classList.add('active');
-      } else if (idx === 'rewards') {
-        document.getElementById('screenRewards').classList.add('active');
+      } else if (idx === 'crm') {
+        document.getElementById('screenCRM').classList.add('active');
       }
-    }
-
-    function openConfigModal() { document.getElementById('balanceConfigModal').style.display = 'flex'; }
-    function closeConfigModal() { document.getElementById('balanceConfigModal').style.display = 'none'; }
-    
-    function saveCustomBalances() {
-      vctBal = parseFloat(document.getElementById('vctInput').value) || vctBal;
-      document.getElementById('vctBalDisplay').innerText = vctBal.toFixed(2);
-      closeConfigModal();
-      showToast("Custom Balances Updated!");
-    }
-
-    function openOwnerModal() { document.getElementById('ownerPinModal').style.display = 'flex'; }
-    function closeOwnerModal() { document.getElementById('ownerPinModal').style.display = 'none'; }
-    
-    function verifyOwnerPin() {
-      closeOwnerModal();
-      showToast("👑 Owner Controls Unlocked!");
-      document.getElementById('userRoleSub').innerText = "👑 Owner Superuser";
     }
 
     function executeTrade(side) {

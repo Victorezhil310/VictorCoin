@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.db.session import init_db
-from app.routers import auth, wallet, trade, staking, kyc, owner_admin, ads_payments, mining
+from app.routers import auth, wallet, trade, staking, kyc, owner_admin, ads_payments, mining, crm
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -44,6 +44,7 @@ app.include_router(mining.router, prefix=settings.API_V1_STR)
 app.include_router(kyc.router, prefix=settings.API_V1_STR)
 app.include_router(owner_admin.router, prefix=settings.API_V1_STR)
 app.include_router(ads_payments.router, prefix=settings.API_V1_STR)
+app.include_router(crm.router, prefix=settings.API_V1_STR)
 
 @app.get("/")
 async def root():
